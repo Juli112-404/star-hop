@@ -14,7 +14,8 @@ for(const width of [390,900]){
  const scope={document:doc,localStorage:{getItem:()=>null,setItem(){}},innerWidth:width,innerHeight:844,devicePixelRatio:1,location:{search:''},URLSearchParams,OrbitEngine:{OrbitGame},PlanetLevels:stages,addEventListener(n,f){handlers[n]=f},requestAnimationFrame:f=>frame=f,Math,Date,JSON,Set};
  vm.runInNewContext(source,scope);frame(16);assert.ok(drawn.includes('点击释放起跳'));assert.equal(elements.get('.overlay').style.display,'none');assert.ok(!handlers.keydown);
  drawn.length=0;elements.get('canvas').onpointerdown({preventDefault(){}});frame(32);assert.ok(!drawn.includes('点击释放起跳'));assert.ok(elements.get('#status').textContent.startsWith('1/'));
- children[1].onclick();drawn.length=0;frame(48);assert.ok(!drawn.includes('点击释放起跳'));assert.equal(elements.get('.overlay').style.display,'none');assert.ok(!/<span>/.test(elements.get('#levels').innerHTML));
+ children[1].onclick();drawn.length=0;frame(48);assert.ok(drawn.includes('点击释放起跳'),'locked level returns to first stage');assert.ok(elements.get('#levels').innerHTML.includes('disabled'));assert.equal(elements.get('.overlay').style.display,'none');assert.ok(!/<span>/.test(elements.get('#levels').innerHTML));
  elements.get('#pause').onclick();assert.equal(elements.get('#export').style.display,'inline-block');elements.get('#primary').onclick();assert.equal(elements.get('.overlay').style.display,'none');
 }
 console.log('PASS minimal mobile/desktop UI: no footer or stage prompts, no keyboard launch, tutorial only before first shot in level 1, other levels start immediately, pause menu works.');
+
