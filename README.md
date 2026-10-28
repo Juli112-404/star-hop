@@ -1,24 +1,40 @@
-# 星际跃迁 · Star Hop
+# 星际跃迁 Star Hop
 
-只包含星球游戏：九个机制样板关和原版星球无尽模式。不包含《转个弯！》。当前尚未制作 50 关。
+单击起跳的 HTML5 星球游戏，支持桌面鼠标与手机触屏。当前提供十个闯关关卡和无尽挑战，无后端、无外部资源。
 
-## 下载后怎么玩
+## 下载试玩
 
-[下载完整离线包（ZIP）](https://github.com/Juli112-404/star-hop/archive/refs/heads/main.zip) · [查看单文件 HTML](https://github.com/Juli112-404/star-hop/blob/main/index.html)
+点击仓库页面 Code → Download ZIP，解压后用浏览器打开根目录 index.html。也可进入 index.html 文件页，选择 Download raw file 下载单文件，离线打开即可。无需 Node.js 或电脑持续运行。
 
-下载 ZIP 后解压，打开 star-hop-main 文件夹中的 index.html。单个 HTML 可在文件页面点击 Download raw file 下载。
+## 十关内容
 
-下载 `index.html`，用支持 JavaScript 的浏览器打开即可。所有样式和游戏代码已经内置，不需要 ChatGPT、登录、VPN、服务器或安装依赖。也可以下载整个仓库 ZIP，解压后打开 `index.html`。
+1. 初次起跳
+2. 两次跃迁
+3. 自由选路
+4. 引力绕障
+5. 移动终点与交会预判
+6. 90° 传送门
+7. 星球逐渐变小
+8. 限时起跳
+9. 钥匙解锁
+10. 传送与限时组合
 
-手机需要通过真正的浏览器打开 HTML；微信、QQ、“文件”应用等的预览窗口可能不执行脚本。实体手机兼容性尚未完成测试。GitHub 下载是否顺畅取决于当地网络，下载后的游戏不需要联网。
+闯关以抵达终点为目标，无星屑收集或星级评分。PERFECT 为精准操作反馈。第一关显示点击引导，其余通过图形展示；无键盘快捷键。无尽模式保留计分、连击和本地最高纪录。
 
-点击画面或按空格发射；PERFECT 和连续精准提供额外奖励。可以暂停、重开和自由选关。最高分与星级保存在浏览器本地，隐私模式或文件网址的存储可能受限。
+## 开发与验证
 
-## 修改与重建
+使用 Node.js 重建：`node build.cjs`。
 
-`src/` 保留可编辑源码；关卡数据在 `src/levels-data.js`，物理规则在 `src/levels-engine.js`，画面与操作在 `src/levels.js`。
+运行验证：
 
-开发时运行 `node build.cjs` 重建单文件 `index.html`。玩家无需 Node.js。仓库：https://github.com/Juli112-404/star-hop 。
+```
+node tests/review.cjs
+node tests/mobile-size.cjs
+node tests/minimal-ui.cjs
+```
 
-此目录是独立发布版；此前的双游戏原型作为历史文件保留。
+可选本机服务：`node server.cjs`，访问 http://127.0.0.1:8092 。
 
+`src/review-data.js` 定义关卡，`src/levels-engine.js` 实现可独立测试的模拟，`src/review.js` 处理绘制和交互。新增关卡可继续扩展数据；目前仅为十关版本，尚未完成比赛所需五十关。
+
+本地记录存储于浏览器，暂停菜单可导出试玩记录；不向服务器发送。已完成十关路线、手机尺寸及界面自动检查，实体手机兼容性仍需实际试玩确认。
