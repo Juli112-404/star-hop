@@ -25,9 +25,22 @@ class OrbitGame{
  if(nearest){this.ball.x=old.x+(this.ball.x-old.x)*nearest.t;this.ball.y=old.y+(this.ball.y-old.y)*nearest.t;if(nearest.type==='node')this.capture(nearest.i,nearest.miss);else if(nearest.type==='portal'){const p=nearest.portal,c=Math.cos(p.rotation),s=Math.sin(p.rotation),vx=this.ball.vx*c-this.ball.vy*s,vy=this.ball.vx*s+this.ball.vy*c;this.ball={x:p.exit.x+vx/290*(p.r+9),y:p.exit.y+vy/290*(p.r+9),vx,vy};this.portalCooldown=.3;this.portalUsed=true;this.trail=[];this.messageFor('传送完成 · 航向旋转 90°')}else this.fail(nearest.type==='core'?'碰撞':nearest.type==='gate'?'尚未解锁':'碰撞');return}
  if(this.ball.x< -70||this.ball.x>670||this.ball.y<70||this.ball.y>650||this.travelTime>6)this.fail('偏离轨道')}
 }
-OrbitGame.prototype.clone=function(){const copy=Object.assign(new OrbitGame(this.level),this);for(const k of ['visited','consumed','keys','switches','collected'])copy[k]=new Set(this[k]);copy.ball={...this.ball};copy.trail=this.trail.map(p=>({...p}));return copy};
+OrbitGame.prototype.clone=function(){const copy=Object.assign(new OrbitGame(this.level),this);for(const k of ['visited','consumed','keys','switches','collected'])copy[k]=new Set(this[k]);copy.ball={...this.ball};if(this.twin)copy.twin=this.twin.clone();copy.trail=this.trail.map(p=>({...p}));return copy};
 // Preview uses the exact collision, gravity and portal rules without changing the real run.
 OrbitGame.prototype.preview=function(duration=.72){if(this.flight||this.state==='dead')return {points:[],portals:[]};const sim=this.clone();sim.state='playing';sim.action();const points=[{...sim.ball}],portals=[];for(let t=0;t<duration&&sim.flight&&sim.state==='playing';t+=1/120){const was=sim.portalUsed;sim.step(1/120);if(!was&&sim.portalUsed){points.push({break:true,...sim.ball});portals.push({x:sim.ball.x,y:sim.ball.y,angle:Math.atan2(sim.ball.vy,sim.ball.vx)})}else if(Math.round(t*120)%3===0)points.push({x:sim.ball.x,y:sim.ball.y})}return {points,portals}};
+// Twin stages simulate both tangential shots independently and require both arrivals.
+const originalAction=OrbitGame.prototype.action,originalStep=OrbitGame.prototype.step;
+OrbitGame.prototype.action=function(){if(this.level.twinOffset&&!this.twin&&this.state==='playing'&&!this.flight&&!this.firstArrived){const l={...this.level};delete l.twinOffset;this.twin=new OrbitGame(l);this.twin.time=this.time;this.twin.angle=this.angle+this.level.twinOffset;this.twin.ball=this.twin.orbitPoint();originalAction.call(this.twin)}if(this.firstArrived)return;return originalAction.call(this)};
+OrbitGame.prototype.step=function(dt){
+if(!this.twin)return originalStep.call(this,dt);
+if(this.state!=='playing')return;
+if(this.twin.state==='playing')originalStep.call(this.twin,dt);
+if(!this.firstArrived){originalStep.call(this,dt);if(this.state==='won'){this.firstArrived=true;this.state='playing'}}else this.time+=dt;
+if(this.state==='dead'||this.twin.state==='dead'){this.fail('双球未同时抵达');return}
+if(this.firstArrived&&this.twin.state==='won'){this.state='won';this.flight=false}
+};
+const basePreview=OrbitGame.prototype.preview;
+OrbitGame.prototype.preview=function(duration=.72){const out=basePreview.call(this,duration);if(this.level.twinOffset&&!this.flight&&!this.firstArrived){const l={...this.level};delete l.twinOffset;const second=new OrbitGame(l);second.time=this.time;second.angle=this.angle+this.level.twinOffset;second.ball=second.orbitPoint();out.twinPoints=basePreview.call(second,duration).points}return out};
 const exported={Physics,OrbitGame};if(typeof module!=='undefined'&&module.exports)module.exports=exported;else root.OrbitEngine=exported;
 })(typeof globalThis!=='undefined'?globalThis:this);
 
