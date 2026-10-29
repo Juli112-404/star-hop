@@ -7,4 +7,3 @@ assert.deepEqual(stages[6].nodes.map(n=>n.r),[66,60,54,48]);
 assert.ok(stages.every(l=>l.nodes.every(n=>n.r>=28)));
 console.log('PASS 320/390/430px: all goals retain >=44px capture diameter, all planets fit, stage radii remain above 28.');
 
-
