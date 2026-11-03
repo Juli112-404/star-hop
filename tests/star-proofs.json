@@ -1,0 +1,814 @@
+[
+  {
+    "route": [
+      {
+        "wait": 0.8333333333333334,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.404,
+    "sampleCount": 47,
+    "centerDistance": 2.119,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.7333333333333333,
+        "target": 1
+      },
+      {
+        "wait": 4.366666666666666,
+        "target": 2
+      }
+    ],
+    "successfulShotShare": 0.405,
+    "sampleCount": 42,
+    "centerDistance": 0.001,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 4.266666666666667,
+        "target": 2
+      }
+    ],
+    "successfulShotShare": 0.4,
+    "sampleCount": 25,
+    "centerDistance": 2.433,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 3.6333333333333333,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.389,
+    "sampleCount": 18,
+    "centerDistance": 3.922,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 3.933333333333333,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.4,
+    "sampleCount": 30,
+    "centerDistance": 3.042,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.7,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.4,
+    "sampleCount": 45,
+    "centerDistance": 2.858,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.75,
+        "target": 1
+      },
+      {
+        "wait": 4.55,
+        "target": 2
+      },
+      {
+        "wait": 5.466666666666667,
+        "target": 3
+      }
+    ],
+    "successfulShotShare": 0.404,
+    "sampleCount": 47,
+    "centerDistance": 2.12,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.75,
+        "target": 1
+      },
+      {
+        "wait": 1.3666666666666667,
+        "target": 2
+      }
+    ],
+    "successfulShotShare": 0.41,
+    "sampleCount": 39,
+    "centerDistance": 0,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.7,
+        "target": 1
+      },
+      {
+        "wait": 1.1666666666666667,
+        "target": 2
+      }
+    ],
+    "successfulShotShare": 0.4,
+    "sampleCount": 45,
+    "centerDistance": 0.001,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.7166666666666667,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.417,
+    "sampleCount": 24,
+    "centerDistance": 3.512,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.95,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.391,
+    "sampleCount": 46,
+    "centerDistance": 2.857,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.95,
+        "target": 1
+      },
+      {
+        "wait": 5.183333333333334,
+        "target": 2
+      }
+    ],
+    "successfulShotShare": 0.409,
+    "sampleCount": 44,
+    "centerDistance": 0.002,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 3.8,
+        "target": 1
+      },
+      {
+        "wait": 4.3,
+        "target": 2
+      }
+    ],
+    "successfulShotShare": 0.4,
+    "sampleCount": 40,
+    "centerDistance": 2.937,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.75,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.4,
+    "sampleCount": 25,
+    "centerDistance": 0.004,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 3.6333333333333333,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.421,
+    "sampleCount": 19,
+    "centerDistance": 3.922,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 1.2833333333333334,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.818,
+    "sampleCount": 11,
+    "centerDistance": 3.849,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.7,
+        "target": 1
+      },
+      {
+        "wait": 1.15,
+        "target": 2
+      },
+      {
+        "wait": 4.8,
+        "target": 4
+      }
+    ],
+    "successfulShotShare": 0.396,
+    "sampleCount": 48,
+    "centerDistance": 2.867,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.8333333333333334,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.404,
+    "sampleCount": 47,
+    "centerDistance": 2.119,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.7333333333333333,
+        "target": 1
+      },
+      {
+        "wait": 1.4166666666666667,
+        "target": 2
+      }
+    ],
+    "successfulShotShare": 0.405,
+    "sampleCount": 42,
+    "centerDistance": 0.001,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.7833333333333333,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.391,
+    "sampleCount": 23,
+    "centerDistance": 0,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.7833333333333333,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.4,
+    "sampleCount": 25,
+    "centerDistance": 0.003,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 4.4,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.9,
+    "sampleCount": 10,
+    "centerDistance": 2.846,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 3.8833333333333333,
+        "target": 1
+      },
+      {
+        "wait": 4.633333333333334,
+        "target": 2
+      }
+    ],
+    "successfulShotShare": 0.4,
+    "sampleCount": 35,
+    "centerDistance": 2.081,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.7166666666666667,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.4,
+    "sampleCount": 40,
+    "centerDistance": 3.51,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.6833333333333333,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.414,
+    "sampleCount": 29,
+    "centerDistance": 0,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 3.95,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.412,
+    "sampleCount": 17,
+    "centerDistance": 0.001,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.8666666666666667,
+        "target": 1
+      },
+      {
+        "wait": 1.8833333333333333,
+        "target": 2
+      }
+    ],
+    "successfulShotShare": 0.394,
+    "sampleCount": 33,
+    "centerDistance": 0.001,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.7666666666666667,
+        "target": 1
+      },
+      {
+        "wait": 4.2,
+        "target": 2
+      },
+      {
+        "wait": 3.7666666666666666,
+        "target": 4
+      }
+    ],
+    "successfulShotShare": 0.41,
+    "sampleCount": 39,
+    "centerDistance": 0.002,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 6.766666666666667,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.412,
+    "sampleCount": 17,
+    "centerDistance": 0.089,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 3.8333333333333335,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.4,
+    "sampleCount": 25,
+    "centerDistance": 2.429,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.7666666666666667,
+        "target": 1
+      },
+      {
+        "wait": 5.65,
+        "target": 2
+      },
+      {
+        "wait": 1.4,
+        "target": 3
+      }
+    ],
+    "successfulShotShare": 0.385,
+    "sampleCount": 26,
+    "centerDistance": 0.003,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 4.016666666666667,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.636,
+    "sampleCount": 11,
+    "centerDistance": 0.001,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.7666666666666667,
+        "target": 1
+      },
+      {
+        "wait": 2.533333333333333,
+        "target": 2
+      },
+      {
+        "wait": 5.433333333333334,
+        "target": 3
+      }
+    ],
+    "successfulShotShare": 0.391,
+    "sampleCount": 23,
+    "centerDistance": 0.003,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.75,
+        "target": 1
+      },
+      {
+        "wait": 5.566666666666666,
+        "target": 2
+      },
+      {
+        "wait": 4.616666666666666,
+        "target": 3
+      },
+      {
+        "wait": 5.316666666666666,
+        "target": 4
+      }
+    ],
+    "successfulShotShare": 0.407,
+    "sampleCount": 27,
+    "centerDistance": 0.005,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.7,
+        "target": 1
+      },
+      {
+        "wait": 1.2666666666666666,
+        "target": 2
+      }
+    ],
+    "successfulShotShare": 0.391,
+    "sampleCount": 23,
+    "centerDistance": 0.001,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.3333333333333333,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.4,
+    "sampleCount": 20,
+    "centerDistance": 0.001,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.8333333333333334,
+        "target": 1
+      },
+      {
+        "wait": 3.35,
+        "target": 2
+      },
+      {
+        "wait": 5.3,
+        "target": 3
+      },
+      {
+        "wait": 6.05,
+        "target": 4
+      }
+    ],
+    "successfulShotShare": 0.411,
+    "sampleCount": 73,
+    "centerDistance": 0.001,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.8833333333333333,
+        "target": 1
+      },
+      {
+        "wait": 4.516666666666667,
+        "target": 2
+      }
+    ],
+    "successfulShotShare": 0.412,
+    "sampleCount": 34,
+    "centerDistance": 3.444,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 6.733333333333333,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.4,
+    "sampleCount": 20,
+    "centerDistance": 2.908,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 3.8833333333333333,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.389,
+    "sampleCount": 18,
+    "centerDistance": 3.626,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.9166666666666666,
+        "target": 1
+      },
+      {
+        "wait": 5.583333333333333,
+        "target": 2
+      },
+      {
+        "wait": 4.5,
+        "target": 3
+      },
+      {
+        "wait": 5.383333333333334,
+        "target": 4
+      }
+    ],
+    "successfulShotShare": 0.407,
+    "sampleCount": 27,
+    "centerDistance": 0.002,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.8833333333333333,
+        "target": 1
+      },
+      {
+        "wait": 3.7666666666666666,
+        "target": 2
+      },
+      {
+        "wait": 3.4833333333333334,
+        "target": 3
+      },
+      {
+        "wait": 3.5,
+        "target": 4
+      },
+      {
+        "wait": 3.5166666666666666,
+        "target": 5
+      }
+    ],
+    "successfulShotShare": 0.394,
+    "sampleCount": 33,
+    "centerDistance": 0.001,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.7,
+        "target": 1
+      },
+      {
+        "wait": 4.533333333333333,
+        "target": 2
+      },
+      {
+        "wait": 3.183333333333333,
+        "target": 1
+      },
+      {
+        "wait": 0.7,
+        "target": 0
+      },
+      {
+        "wait": 3.95,
+        "target": 3
+      }
+    ],
+    "successfulShotShare": 0.4,
+    "sampleCount": 45,
+    "centerDistance": 2.867,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.7166666666666667,
+        "target": 1
+      },
+      {
+        "wait": 4.666666666666667,
+        "target": 2
+      },
+      {
+        "wait": 5.783333333333333,
+        "target": 3
+      },
+      {
+        "wait": 4.633333333333334,
+        "target": 4
+      }
+    ],
+    "successfulShotShare": 0.385,
+    "sampleCount": 26,
+    "centerDistance": 0.001,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.9166666666666666,
+        "target": 1
+      },
+      {
+        "wait": 1.2666666666666666,
+        "target": 2
+      }
+    ],
+    "successfulShotShare": 0.412,
+    "sampleCount": 17,
+    "centerDistance": 0,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 1.2333333333333334,
+        "target": 1
+      },
+      {
+        "wait": 3.85,
+        "target": 2
+      },
+      {
+        "wait": 5.75,
+        "target": 3
+      }
+    ],
+    "successfulShotShare": 0.4,
+    "sampleCount": 25,
+    "centerDistance": 0.003,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.7333333333333333,
+        "target": 1
+      },
+      {
+        "wait": 3.8,
+        "target": 2
+      },
+      {
+        "wait": 4.75,
+        "target": 3
+      },
+      {
+        "wait": 3.8666666666666667,
+        "target": 4
+      }
+    ],
+    "successfulShotShare": 0.417,
+    "sampleCount": 24,
+    "centerDistance": 3.509,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 0.75,
+        "target": 1
+      },
+      {
+        "wait": 2.5,
+        "target": 2
+      },
+      {
+        "wait": 5.133333333333334,
+        "target": 3
+      },
+      {
+        "wait": 2.3833333333333333,
+        "target": 4
+      }
+    ],
+    "successfulShotShare": 0.407,
+    "sampleCount": 27,
+    "centerDistance": 0.005,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 1.2333333333333334,
+        "target": 1
+      },
+      {
+        "wait": 4.916666666666667,
+        "target": 0
+      },
+      {
+        "wait": 1.0666666666666667,
+        "target": 2
+      }
+    ],
+    "successfulShotShare": 0.414,
+    "sampleCount": 29,
+    "centerDistance": 0.001,
+    "timingTolerance": 0.016666666666666666
+  },
+  {
+    "route": [
+      {
+        "wait": 4.35,
+        "target": 1
+      },
+      {
+        "wait": 3.3,
+        "target": 2
+      },
+      {
+        "wait": 6.216666666666667,
+        "target": 3
+      }
+    ],
+    "successfulShotShare": 1,
+    "sampleCount": 4,
+    "centerDistance": 2.004,
+    "timingTolerance": 0.016666666666666666
+  }
+]
