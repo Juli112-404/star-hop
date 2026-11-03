@@ -1,15 +1,196 @@
-/* Future level mode can supply targets through makeTarget instead of the endless generator. */
-const orbit=Arcade.mount('orbit-best-v1','星际跃迁');
-(()=>{let current,target,ball,angle,flight=false,steps=0,travel=0,trail=[],camera={x:0,y:0};let radius=70,capture=68,deadline=null,elapsed=0,clock=0;const speed=310,perfect=13;
-function makeTarget(){let a=Math.random()*Math.PI*2,d=190+Math.random()*65;capture=Math.max(28,68-steps*1.3);const x=current.x+Math.cos(a)*d,y=current.y+Math.sin(a)*d;return{x,y,baseX:x,baseY:y,r:capture,moving:steps>=3&&Math.random()<.4,axis:Math.random()<.5?'x':'y',phase:Math.random()*6.28}}
-function pos(){return{x:current.x+Math.cos(angle)*radius,y:current.y+Math.sin(angle)*radius}}
-function aim(){let p=pos(),vx=-Math.sin(angle),vy=Math.cos(angle),dx=target.x-p.x,dy=target.y-p.y;let along=dx*vx+dy*vy;return{p,vx,vy,along,miss:Math.abs(dx*vy-dy*vx)}}
-orbit.onStart=()=>{steps=0;clock=0;elapsed=0;deadline=null;radius=70;current={x:0,y:0,r:65};target=makeTarget();angle=-Math.PI/2;ball=pos();flight=false;steps=0;trail=[];camera={x:0,y:0}};
-orbit.onAction=()=>{if(flight)return;let a=aim();ball={...a.p,vx:a.vx*speed,vy:a.vy*speed};flight=true;travel=0;trail=[]};
-orbit.update=dt=>{if(!current)return;clock+=dt;if(target.moving)target[target.axis]=(target.axis==='x'?target.baseX:target.baseY)+Math.sin(clock*1.1+target.phase)*35;camera.x+=(current.x-camera.x)*Math.min(1,dt*7);camera.y+=(current.y-camera.y)*Math.min(1,dt*7);if(!flight){elapsed+=dt;if(deadline!==null&&elapsed>=deadline){orbit.fail('起跳时间已到');return}angle+=dt*Math.min(1.55,1.05+steps*.018);ball=pos();return}let ox=ball.x,oy=ball.y;ball.x+=ball.vx*dt;ball.y+=ball.vy*dt;travel+=speed*dt;trail.push({x:ball.x,y:ball.y});if(trail.length>35)trail.shift();let dx=ball.x-ox,dy=ball.y-oy,t=Arcade.clamp(((target.x-ox)*dx+(target.y-oy)*dy)/(dx*dx+dy*dy),0,1);if(Math.hypot(ox+dx*t-target.x,oy+dy*t-target.y)<=capture){let miss=Math.abs((target.x-ox)*ball.vy-(target.y-oy)*ball.vx)/speed;orbit.award(miss<=perfect);current=target;radius=current.r+5;steps++;elapsed=0;deadline=steps>=5&&Math.random()<.35?4.5:null;angle=Math.atan2(ball.y-current.y,ball.x-current.x);target=makeTarget();flight=false;trail=[]}else if(travel>650)orbit.fail('偏离轨道')};
-orbit.draw=()=>{const c=orbit.ctx,w=orbit.w,h=orbit.h,scale=Math.min(w/620,(h-150)/620,1.15);c.fillStyle='#0b1220';c.fillRect(0,0,w,h);if(!current)return;c.save();c.translate(w/2,h/2+25);c.scale(scale,scale);c.translate(-camera.x,-camera.y);c.lineWidth=1;for(let i=0;i<70;i++){let x=((i*137)%1100)-550+camera.x,y=((i*223)%1000)-500+camera.y;c.fillStyle='#3a526b';c.fillRect(x,y,2,2)}
-function planet(p,isTarget){c.beginPath();c.arc(p.x,p.y,isTarget?capture:radius,0,Math.PI*2);c.strokeStyle=isTarget?'#68e7c177':'#799ab455';c.setLineDash(isTarget?[5,6]:[]);c.stroke();c.setLineDash([]);c.beginPath();c.arc(p.x,p.y,(isTarget?capture:current.r)*.62,0,Math.PI*2);c.fillStyle=isTarget?'#ffce7633':'#345d77';c.fill();c.strokeStyle=isTarget?'#ffce76':'#5785a1';c.stroke();if(isTarget){c.beginPath();c.moveTo(p.x-4,p.y+8);c.lineTo(p.x-4,p.y-9);c.lineTo(p.x+8,p.y-4);c.lineTo(p.x-4,p.y);c.strokeStyle='#ffce76';c.stroke()}}planet(current,false);planet(target,true);if(target.moving){c.setLineDash([3,8]);c.strokeStyle='#ffd17c77';c.beginPath();c.moveTo(target.baseX-(target.axis==='x'?35:0),target.baseY-(target.axis==='y'?35:0));c.lineTo(target.baseX+(target.axis==='x'?35:0),target.baseY+(target.axis==='y'?35:0));c.stroke();c.setLineDash([])}if(deadline!==null&&!flight){c.beginPath();c.arc(current.x,current.y,radius+10,-Math.PI/2,-Math.PI/2+Math.PI*2*Math.max(0,1-elapsed/deadline));c.strokeStyle='#ffb274';c.lineWidth=4;c.stroke();c.fillStyle='#ffcc9c';c.font='18px system-ui';c.textAlign='center';c.fillText((deadline-elapsed).toFixed(1)+'s',current.x,current.y+radius+36)}
-if(!flight){let a=aim();c.beginPath();c.moveTo(a.p.x,a.p.y);c.lineTo(a.p.x+a.vx*340,a.p.y+a.vy*340);c.strokeStyle=a.along>0&&a.miss<=capture?(a.miss<=perfect?'#ffce76':'#68e7c1'):'#799ab466';c.setLineDash([5,7]);c.stroke();c.setLineDash([])}else{c.beginPath();trail.forEach((p,i)=>i?c.lineTo(p.x,p.y):c.moveTo(p.x,p.y));c.strokeStyle='#77edcc88';c.lineWidth=3;c.stroke()}c.beginPath();c.arc(ball.x,ball.y,7,0,Math.PI*2);c.fillStyle='#fff';c.shadowColor='#75edce';c.shadowBlur=14;c.fill();c.restore()};
-orbit.onStart();})();
+const orbit=Arcade.mount('orbit-best-endless-v2','无尽');
+const {Physics}=OrbitEngine;
+const walletKey='star-hop-endless-wallet-v1';
+const walletLabel=document.querySelector('#wallet');
+let run,guide,guideAt=-1,camera=null,view=null;
+function loadWallet(){
+  try{return new StarEconomy(JSON.parse(localStorage.getItem(walletKey)||'{}'))}
+  catch{return new StarEconomy()}
+}
+let wallet=loadWallet();
+function showWallet(){walletLabel.textContent='★ '+wallet.balance}
+function saveWallet(){try{localStorage.setItem(walletKey,JSON.stringify(wallet))}catch{}showWallet()}
+showWallet();
 
+orbit.onStart=()=>{
+  wallet=loadWallet();
+  showWallet();
+  run=new StarEndless.EndlessRun();
+  run.next();
+  camera=view=null;
+  guideAt=-1;
+};
+orbit.onAction=()=>run.game.action();
+orbit.onRevive=()=>{
+  wallet=loadWallet();
+  if(!run.revive(wallet)){showWallet();return false}
+  saveWallet();
+  guideAt=-1;
+  return true;
+};
+orbit.update=dt=>{
+  const game=run.game;
+  game.step(dt);
+  if(game.state==='playing'&&game.used>0&&!game.flight&&!game.inTransit)game.fail('未抵达目标');
+  if(run.collect()){wallet=loadWallet();wallet.balance++;saveWallet()}
+  if(game.state==='dead'){
+    orbit.fail(game.reason,wallet.balance>=StarEndless.revivalCost);
+  }else if(run.advance()){
+    orbit.setScore(run.score);
+    orbit.message(game.perfects?'PERFECT +10':'+10');
+    guideAt=-1;
+  }
+};
 
+const c=orbit.ctx,tau=Math.PI*2;
+function circle(p,r,stroke,fill){
+  c.beginPath();c.arc(p.x,p.y,r,0,tau);
+  if(fill){c.fillStyle=fill;c.fill()}
+  if(stroke){c.strokeStyle=stroke;c.stroke()}
+}
+function line(a,b,color,width=2){
+  c.beginPath();c.moveTo(a.x,a.y);c.lineTo(b.x,b.y);c.strokeStyle=color;c.lineWidth=width;c.stroke();c.lineWidth=2;
+}
+function path(points,color,dashed){
+  if(!points?.length)return;
+  c.beginPath();c.moveTo(points[0].x,points[0].y);
+  for(const p of points.slice(1))p.break?c.moveTo(p.x,p.y):c.lineTo(p.x,p.y);
+  if(dashed)c.setLineDash([4,7]);
+  c.strokeStyle=color;c.stroke();c.setLineDash([]);
+}
+function track(p){
+  if(!p.move)return;
+  const {amp,axis}=p.move;
+  c.setLineDash([4,7]);
+  line({x:p.x-(axis==='x'?amp:0),y:p.y-(axis==='y'?amp:0)},
+       {x:p.x+(axis==='x'?amp:0),y:p.y+(axis==='y'?amp:0)},'#9cb8cf66');
+  c.setLineDash([]);
+}
+function star(p){
+  c.beginPath();
+  for(let i=0;i<10;i++){
+    const a=i*Math.PI/5-Math.PI/2,r=i%2?7:15;
+    const x=p.x+Math.cos(a)*r,y=p.y+Math.sin(a)*r;
+    if(i)c.lineTo(x,y);else c.moveTo(x,y);
+  }
+  c.closePath();c.fillStyle='#ffe184';c.fill();
+}
+function key(p){
+  circle({x:p.x-7,y:p.y},6,'#ffe184');
+  line({x:p.x-1,y:p.y},{x:p.x+15,y:p.y},'#ffe184',3);
+  line({x:p.x+10,y:p.y},{x:p.x+10,y:p.y+5},'#ffe184',3);
+}
+function lock(p){
+  c.strokeStyle='#ffe184';c.beginPath();c.arc(p.x,p.y-6,7,Math.PI,tau);c.stroke();
+  c.strokeRect(p.x-11,p.y-6,22,16);
+}
+function scenery(game){
+  const l=game.level;
+  for(const w of l.wind||[]){
+    c.fillStyle='#6acfff20';c.fillRect(w.x,w.y,w.w,w.h);
+    for(let i=0;i<12;i++){
+      const x=w.x+12+i*37%(w.w-24),y=w.y+12+(i*67+game.time*65)%(w.h-24);
+      const speed=Math.hypot(w.ax,w.ay);
+      line({x,y},{x:x+w.ax/speed*11,y:y+w.ay/speed*11},'#79caef77');
+    }
+  }
+  for(const g of l.gravity||[]){
+    const color=g.force<0?'#ee91bd':'#b393fa';
+    circle(g,g.range,color+'66',color+'13');circle(g,g.r,color,color+'88');
+    circle(g,g.range*(.52+.12*Math.sin(game.time*2)),color+'55');
+    circle(g,g.range*.78,color+'44');
+  }
+  for(const p of l.portals||[]){
+    circle(p.entry,p.r,'#6be4ed','#6be4ed20');circle(p.entry,p.r-7,'#6be4ed66');
+    circle(p.exit,p.r,'#bf99ff','#bf99ff20');circle(p.exit,p.r-7,'#bf99ff66');
+
+  }
+  for(const o of l.obstacles||[]){track(o);circle(Physics.position(o,game.time),o.r,'#f19088','#8c484c')}
+  for(const wall of l.walls||[])line(wall.a,wall.b,'#d98985',8);
+  for(const board of l.reflectors||[])line(board.a,board.b,'#a6e4ff',8);
+}
+function planets(game){
+  const l=game.level;
+  for(const [i,n] of l.nodes.entries()){
+    const p=game.node(i),open=!n.window||game.time%n.window.period<n.window.open;
+    c.save();
+    if(n.goal)c.globalAlpha=Math.min(1,.35+game.time*3);
+    track(n);
+    const color=n.goal?(open?'#ffce76':'#708195'):'#8fcded';
+    circle(p,n.r,color,color+'2b');circle(p,n.r*.62,color+'99',color+'18');
+    if(n.goal){
+      if(l.goalKey&&!game.goalReady())lock(p);else circle(p,6,color,color+'55');
+    }else{
+      circle(p,game.radius(0),'#89b6d655');
+      if(game.launchRemaining!==null&&!game.flight&&game.state==='playing'){
+        c.beginPath();c.arc(p.x,p.y,n.r+10,-Math.PI/2,-Math.PI/2+tau*game.launchRemaining/n.launchSeconds);
+        c.strokeStyle='#ffb274';c.lineWidth=5;c.stroke();c.lineWidth=2;
+        c.fillStyle='#ffcc9c';c.font='bold 19px system-ui';c.textAlign='center';
+        c.fillText(game.launchRemaining.toFixed(1)+'s',p.x,p.y+n.r+35);
+      }
+    }
+    c.restore();
+  }
+  if(l.flightKey&&!game.goalReady())key(l.flightKey);
+  if(l.pickups?.length&&!game.collected.has(0))star(l.pickups[0]);
+}
+function framing(level){
+  let left=Infinity,right=-Infinity,top=Infinity,bottom=-Infinity;
+  function include(p,x=0,y=x){
+    left=Math.min(left,p.x-x);right=Math.max(right,p.x+x);
+    top=Math.min(top,p.y-y);bottom=Math.max(bottom,p.y+y);
+  }
+  for(const n of [...level.nodes,...level.obstacles||[]]){
+    const r=n.r+23;
+    include(n,r+(n.move?.axis==='x'?n.move.amp:0),r+(n.move?.axis==='y'?n.move.amp:0));
+  }
+  for(const g of level.gravity||[])include(g,g.range+10);
+  for(const p of level.portals||[]){include(p.entry,p.r+15);include(p.exit,p.r+15)}
+  for(const p of [...level.walls||[],...level.reflectors||[]]){include(p.a,14);include(p.b,14)}
+  for(const w of level.wind||[]){include(w);include({x:w.x+w.w,y:w.y+w.h})}
+  for(const p of level.pickups||[])include(p,p.r+6);
+  return {...run.toWorld({x:(left+right)/2,y:(top+bottom)/2}),width:right-left,height:bottom-top,level};
+}
+orbit.draw=(dt=1/60)=>{
+  const {w,h}=orbit;
+  c.fillStyle='#0b1220';c.fillRect(0,0,w,h);
+  if(!run)return;
+  const game=run.game,level=game.level;
+  if(view?.level!==level)view=framing(level);
+  const fit=Math.max(.1,Math.min((w-24)/Math.max(570,view.width),(h-106)/view.height,1.22));
+  if(!camera)camera={x:view.x,y:view.y,scale:fit};
+  const blend=1-Math.exp(-11*dt);
+  camera.x+=(view.x-camera.x)*blend;
+  camera.y+=(view.y-camera.y)*blend;
+  camera.scale+=(fit-camera.scale)*blend;
+  const scale=camera.scale;
+  c.fillStyle='#39546e';
+  const wrap=(v,size)=>(v%size+size)%size;
+  for(let i=0;i<56;i++){
+    c.fillRect(wrap(i*137-camera.x*.19,w),wrap(i*223-camera.y*.19,h),1.5,1.5);
+  }
+  c.save();c.translate(w/2,(h+58)/2);c.scale(scale,scale);c.translate(-camera.x,-camera.y);c.lineWidth=2;
+  c.translate(run.origin.x,run.origin.y);
+  const aiming=!game.flight&&!game.inTransit&&game.state==='playing';
+  if(aiming&&(guideAt<0||game.time-guideAt>=1/60-.001)){
+    guide=game.preview(3.5);guideAt=game.time;
+  }
+  scenery(game);planets(game);
+  if(aiming){
+    path(guide?.points,guide?.landing?'#79edc9':'#b7c8d866',true);
+    path(guide?.twinPoints,guide?.landing?'#79edc9':'#8fcfff88',true);
+  }else{
+    path([...game.trail,game.ball],'#a6eddb88',false);
+    if(game.twin)path([...game.twin.trail,game.twin.ball],'#8fcfff99',false);
+  }
+  const radius=Math.max(6,3.5/scale);
+  circle(game.ball,radius,null,'#fff');
+  if(level.twinOffset){
+    const p=game.node(game.current),a=game.angle+game.twinGap(),r=game.radius();
+    const twin=game.twin?.ball||{x:p.x+Math.cos(a)*r,y:p.y+Math.sin(a)*r};
+    circle(twin,radius,null,'#8fcfff');
+  }
+  if(game.failurePoint)circle(game.failurePoint,14,'#ff9184');
+  c.restore();
+};
+orbit.onStart();

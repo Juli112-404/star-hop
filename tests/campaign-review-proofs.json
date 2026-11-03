@@ -1,0 +1,322 @@
+{
+  "10": {
+    "route": [
+      {
+        "wait": 0.3333333333333333,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.4,
+    "sampleCount": 20,
+    "centerDistance": 0.006,
+    "timingTolerance": 0.016666666666666666
+  },
+  "11": {
+    "route": [
+      {
+        "wait": 4.166666666666667,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.429,
+    "sampleCount": 14,
+    "centerDistance": 3.999,
+    "timingTolerance": 0.016666666666666666
+  },
+  "12": {
+    "route": [
+      {
+        "wait": 3.8833333333333333,
+        "target": 1
+      },
+      {
+        "wait": 5.4,
+        "target": 2
+      }
+    ],
+    "successfulShotShare": 0.4,
+    "sampleCount": 30,
+    "centerDistance": 2.105,
+    "timingTolerance": 0.016666666666666666
+  },
+  "13": {
+    "route": [
+      {
+        "wait": 0.7666666666666667,
+        "target": 1
+      },
+      {
+        "wait": 2.8666666666666667,
+        "target": 2
+      }
+    ],
+    "successfulShotShare": 0.394,
+    "sampleCount": 33,
+    "centerDistance": 0.002,
+    "timingTolerance": 0.016666666666666666
+  },
+  "16": {
+    "route": [
+      {
+        "wait": 4.133333333333334,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.7,
+    "sampleCount": 10,
+    "centerDistance": 0,
+    "timingTolerance": 0.016666666666666666
+  },
+  "18": {
+    "route": [
+      {
+        "wait": 0.8333333333333334,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.404,
+    "sampleCount": 47,
+    "centerDistance": 2.119,
+    "timingTolerance": 0.016666666666666666
+  },
+  "21": {
+    "route": [
+      {
+        "wait": 0.75,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.533,
+    "sampleCount": 15,
+    "centerDistance": 0.004,
+    "timingTolerance": 0.016666666666666666
+  },
+  "24": {
+    "route": [
+      {
+        "wait": 0.8,
+        "target": 1
+      }
+    ],
+    "successfulShotShare": 0.421,
+    "sampleCount": 19,
+    "centerDistance": 0.003,
+    "timingTolerance": 0.016666666666666666
+  },
+  "26": {
+    "route": [
+      {
+        "wait": 3.95,
+        "target": 1
+      },
+      {
+        "wait": 4.433333333333334,
+        "target": 2
+      }
+    ],
+    "successfulShotShare": 0.467,
+    "sampleCount": 15,
+    "centerDistance": 3.81,
+    "timingTolerance": 0.016666666666666666
+  },
+  "27": {
+    "route": [
+      {
+        "wait": 0.75,
+        "target": 1
+      },
+      {
+        "wait": 4.7,
+        "target": 2
+      },
+      {
+        "wait": 2.9166666666666665,
+        "target": 3
+      }
+    ],
+    "successfulShotShare": 0.389,
+    "sampleCount": 36,
+    "centerDistance": 0,
+    "timingTolerance": 0.016666666666666666
+  },
+  "28": {
+    "route": [
+      {
+        "wait": 0.7166666666666667,
+        "target": 1
+      },
+      {
+        "wait": 3.933333333333333,
+        "target": 2
+      },
+      {
+        "wait": 3.8666666666666667,
+        "target": 4
+      }
+    ],
+    "successfulShotShare": 0.4,
+    "sampleCount": 40,
+    "centerDistance": 3.52,
+    "timingTolerance": 0.016666666666666666
+  },
+  "29": {
+    "route": [
+      {
+        "wait": 6.766666666666667,
+        "target": 1
+      },
+      {
+        "wait": 4.15,
+        "target": 2
+      }
+    ],
+    "successfulShotShare": 0.412,
+    "sampleCount": 17,
+    "centerDistance": 0.089,
+    "timingTolerance": 0.016666666666666666
+  },
+  "30": {
+    "route": [
+      {
+        "wait": 0.8,
+        "target": 1
+      },
+      {
+        "wait": 1.5333333333333334,
+        "target": 2
+      }
+    ],
+    "successfulShotShare": 0.391,
+    "sampleCount": 23,
+    "centerDistance": 0.002,
+    "timingTolerance": 0.016666666666666666
+  },
+  "32": {
+    "route": [
+      {
+        "wait": 4.016666666666667,
+        "target": 1
+      },
+      {
+        "wait": 3.45,
+        "target": 2
+      },
+      {
+        "wait": 3.3333333333333335,
+        "target": 3
+      }
+    ],
+    "successfulShotShare": 0.636,
+    "sampleCount": 11,
+    "centerDistance": 0.001,
+    "timingTolerance": 0.016666666666666666
+  },
+  "33": {
+    "route": [
+      {
+        "wait": 0.9,
+        "target": 1
+      },
+      {
+        "wait": 3.7333333333333334,
+        "target": 2
+      },
+      {
+        "wait": 4.5,
+        "target": 3
+      }
+    ],
+    "successfulShotShare": 0.417,
+    "sampleCount": 36,
+    "centerDistance": 3.581,
+    "timingTolerance": 0.016666666666666666
+  },
+  "35": {
+    "route": [
+      {
+        "wait": 3.85,
+        "target": 1
+      },
+      {
+        "wait": 1.25,
+        "target": 2
+      }
+    ],
+    "successfulShotShare": 0.438,
+    "sampleCount": 16,
+    "centerDistance": 3.731,
+    "timingTolerance": 0.016666666666666666
+  },
+  "36": {
+    "route": [
+      {
+        "wait": 3.533333333333333,
+        "target": 1
+      },
+      {
+        "wait": 2.433333333333333,
+        "target": 2
+      }
+    ],
+    "successfulShotShare": 0.389,
+    "sampleCount": 18,
+    "centerDistance": 3.681,
+    "timingTolerance": 0.016666666666666666
+  },
+  "39": {
+    "route": [
+      {
+        "wait": 6.733333333333333,
+        "target": 1
+      },
+      {
+        "wait": 3.966666666666667,
+        "target": 2
+      }
+    ],
+    "successfulShotShare": 0.389,
+    "sampleCount": 18,
+    "centerDistance": 2.908,
+    "timingTolerance": 0.016666666666666666
+  },
+  "40": {
+    "route": [
+      {
+        "wait": 3.9,
+        "target": 1
+      },
+      {
+        "wait": 4.3,
+        "target": 2
+      }
+    ],
+    "successfulShotShare": 0.7,
+    "sampleCount": 10,
+    "centerDistance": 3.614,
+    "timingTolerance": 0.016666666666666666
+  },
+  "48": {
+    "route": [
+      {
+        "wait": 0.75,
+        "target": 1
+      },
+      {
+        "wait": 2.433333333333333,
+        "target": 2
+      },
+      {
+        "wait": 4.866666666666666,
+        "target": 3
+      },
+      {
+        "wait": 2.4166666666666665,
+        "target": 4
+      }
+    ],
+    "successfulShotShare": 0.407,
+    "sampleCount": 27,
+    "centerDistance": 0.005,
+    "timingTolerance": 0.016666666666666666
+  }
+}
