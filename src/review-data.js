@@ -62,23 +62,23 @@ const reviewStages=[
       {
         "x": 80,
         "y": 385,
-        "r": 62
+        "r": 43.840620433565945
       },
       {
         "x": 245,
         "y": 185,
-        "r": 60
+        "r": 42.426406871192846
       },
       {
         "x": 475,
         "y": 370,
-        "r": 56,
+        "r": 39.59797974644666,
         "goal": true
       }
     ],
     "starSpot": {
-      "x": 225.91,
-      "y": 319.99,
+      "x": 302.74,
+      "y": 338.05,
       "r": 14
     }
   },
@@ -132,7 +132,7 @@ const reviewStages=[
       {
         "x": 465,
         "y": 300,
-        "r": 64,
+        "r": 60,
         "goal": true,
         "move": {
           "axis": "y",
@@ -159,7 +159,7 @@ const reviewStages=[
       {
         "x": 455,
         "y": 155,
-        "r": 64,
+        "r": 60,
         "goal": true
       }
     ],
@@ -191,18 +191,13 @@ const reviewStages=[
     }
   },
   {
-    "name": "07 · 精准练习",
-    "tag": "精准",
+    "name": "07 · 风带绕行",
+    "tag": "侧风",
     "nodes": [
       {
         "x": 85,
         "y": 420,
         "r": 66
-      },
-      {
-        "x": 230,
-        "y": 220,
-        "r": 60
       },
       {
         "x": 395,
@@ -212,22 +207,38 @@ const reviewStages=[
       {
         "x": 525,
         "y": 200,
-        "r": 48,
+        "r": 53,
         "goal": true
       }
     ],
-    "obstacles": [
+    "obstacles": [],
+    "starSpot": {
+      "x": 245.47,
+      "y": 424.54,
+      "r": 14
+    },
+    "wind": [
       {
-        "x": 420,
-        "y": 200,
-        "r": 34
+        "x": 145,
+        "y": 344,
+        "w": 173,
+        "h": 184,
+        "ax": 0,
+        "ay": -155
       }
     ],
-    "starSpot": {
-      "x": 130.59,
-      "y": 283.05,
-      "r": 14
-    }
+    "walls": [
+      {
+        "a": {
+          "x": 306,
+          "y": 70
+        },
+        "b": {
+          "x": 306,
+          "y": 380
+        }
+      }
+    ]
   },
   {
     "name": "08 · 一圈之内",
@@ -247,7 +258,7 @@ const reviewStages=[
       {
         "x": 500,
         "y": 405,
-        "r": 54,
+        "r": 50,
         "goal": true
       }
     ],
@@ -265,42 +276,56 @@ const reviewStages=[
     }
   },
   {
-    "name": "09 · 带上钥匙",
+    "name": "09 · 持钥开闸",
     "tag": "机关",
     "goalKey": "gold",
-    "lockHint": "终点尚未解锁",
+    "lockHint": "取钥匙后穿过蓝色感应环",
     "nodes": [
       {
-        "x": 85,
-        "y": 420,
+        "x": 99,
+        "y": 211,
         "r": 62
       },
       {
-        "x": 220,
-        "y": 210,
+        "x": 285,
+        "y": 493,
         "r": 58,
         "key": "gold"
       },
       {
-        "x": 515,
-        "y": 375,
-        "r": 52,
+        "x": 519,
+        "y": 202,
+        "r": 56,
         "goal": true
       }
     ],
-    "gates": [
+    "starSpot": {
+      "x": 247.99,
+      "y": 337.58,
+      "r": 18
+    },
+    "walls": [
       {
-        "x": 370,
-        "y": 395,
-        "r": 60,
-        "key": "gold"
+        "a": {
+          "x": 462,
+          "y": 75
+        },
+        "b": {
+          "x": 462,
+          "y": 560
+        },
+        "switch": "blue"
       }
     ],
-    "starSpot": {
-      "x": 95.14,
-      "y": 294.73,
-      "r": 16
-    }
+    "flySwitches": [
+      {
+        "x": 403,
+        "y": 344,
+        "r": 49,
+        "switch": "blue"
+      }
+    ],
+    "goalSwitch": "blue"
   },
   {
     "name": "10 · 弹板借道",
@@ -375,10 +400,11 @@ const reviewStages=[
           "rate": 0.9
         }
       }
-    ]
+    ],
+    "goalDeadline": 6.283185307179586
   },
   {
-    "name": "12 · 双向节奏",
+    "name": "12 · 逆转入隙",
     "tag": "衔接",
     "nodes": [
       {
@@ -395,15 +421,19 @@ const reviewStages=[
       {
         "x": 475,
         "y": 210,
-        "r": 61,
-        "goal": true
+        "r": 57,
+        "goal": true,
+        "entryArc": {
+          "angle": 2.37,
+          "span": 1.75
+        }
       }
     ],
     "obstacles": [],
     "starSpot": {
-      "x": 213.61,
-      "y": 277.45,
-      "r": 14
+      "x": 246.87,
+      "y": 393.95,
+      "r": 16
     },
     "walls": [
       {
@@ -432,15 +462,15 @@ const reviewStages=[
         "y": 485,
         "r": 61,
         "move": {
-          "axis": "y",
+          "axis": "x",
           "amp": 47,
-          "rate": 0.75
+          "rate": 1.2
         }
       },
       {
         "x": 540,
         "y": 290,
-        "r": 59,
+        "r": 52,
         "goal": true
       }
     ],
@@ -452,8 +482,8 @@ const reviewStages=[
       }
     ],
     "starSpot": {
-      "x": 238.3,
-      "y": 327.4,
+      "x": 242.46,
+      "y": 322.38,
       "r": 14
     }
   },
@@ -464,12 +494,12 @@ const reviewStages=[
       {
         "x": 85,
         "y": 360,
-        "r": 62
+        "r": 59
       },
       {
         "x": 500,
         "y": 360,
-        "r": 64,
+        "r": 54,
         "goal": true
       }
     ],
@@ -477,7 +507,7 @@ const reviewStages=[
       {
         "x": 295,
         "y": 360,
-        "r": 48,
+        "r": 54,
         "move": {
           "axis": "y",
           "amp": 110,
@@ -486,9 +516,9 @@ const reviewStages=[
       }
     ],
     "starSpot": {
-      "x": 233.88,
-      "y": 302.14,
-      "r": 14
+      "x": 389.14,
+      "y": 322.64,
+      "r": 16
     }
   },
   {
@@ -498,7 +528,8 @@ const reviewStages=[
       {
         "x": 90,
         "y": 420,
-        "r": 60
+        "r": 60,
+        "orbitRate": 2.2
       },
       {
         "x": 480,
@@ -526,11 +557,22 @@ const reviewStages=[
         "x": 300,
         "y": 385,
         "r": 65
+      },
+      {
+        "x": 300,
+        "y": 280,
+        "r": 13,
+        "move": {
+          "axis": "orbit",
+          "amp": 155,
+          "rate": 0.55,
+          "phase": 4
+        }
       }
     ],
     "starSpot": {
-      "x": 222.39,
-      "y": 232.34,
+      "x": 298.27,
+      "y": 213.28,
       "r": 14
     }
   },
@@ -557,13 +599,6 @@ const reviewStages=[
         "r": 20,
         "range": 150,
         "force": -700
-      }
-    ],
-    "obstacles": [
-      {
-        "x": 300,
-        "y": 460,
-        "r": 45
       }
     ],
     "starSpot": {
@@ -598,7 +633,7 @@ const reviewStages=[
       {
         "x": 525,
         "y": 370,
-        "r": 56,
+        "r": 49,
         "goal": true
       }
     ],
@@ -616,27 +651,51 @@ const reviewStages=[
     }
   },
   {
-    "name": "18 · 限时抵达",
-    "tag": "起跳",
+    "name": "18 · 限时回弹",
+    "tag": "限时",
     "nodes": [
       {
-        "x": 115,
-        "y": 340,
-        "r": 70
+        "x": 100,
+        "y": 214,
+        "r": 66
       },
       {
-        "x": 390,
-        "y": 310,
-        "r": 68,
+        "x": 519,
+        "y": 202,
+        "r": 70,
         "goal": true
       }
     ],
     "starSpot": {
-      "x": 255.29,
-      "y": 298.33,
+      "x": 271.38,
+      "y": 398.59,
       "r": 14
     },
-    "goalDeadline": 9
+    "goalDeadline": 4.71238898038469,
+    "reflectors": [
+      {
+        "a": {
+          "x": 114,
+          "y": 465
+        },
+        "b": {
+          "x": 488,
+          "y": 482
+        },
+        "turn": {
+          "amp": 0.12,
+          "rate": 0.64,
+          "phase": 0.1
+        }
+      }
+    ],
+    "obstacles": [
+      {
+        "x": 309,
+        "y": 213,
+        "r": 101
+      }
+    ]
   },
   {
     "name": "19 · 限时交会",
@@ -651,7 +710,7 @@ const reviewStages=[
         "x": 265,
         "y": 205,
         "r": 62,
-        "launchSeconds": 4.5
+        "launchSeconds": 3.8
       },
       {
         "x": 500,
@@ -659,7 +718,7 @@ const reviewStages=[
         "r": 60,
         "goal": true,
         "move": {
-          "axis": "y",
+          "axis": "x",
           "amp": 42,
           "rate": 0.8
         }
@@ -689,7 +748,7 @@ const reviewStages=[
       {
         "x": 500,
         "y": 260,
-        "r": 76,
+        "r": 69,
         "goal": true
       }
     ],
@@ -762,42 +821,31 @@ const reviewStages=[
     }
   },
   {
-    "name": "22 · 逆向弧线",
-    "tag": "引力",
+    "name": "22 · 绕圈交会",
+    "tag": "移动",
     "nodes": [
       {
-        "x": 90,
-        "y": 420,
-        "r": 52,
-        "spin": -1
+        "x": 105,
+        "y": 491,
+        "r": 55
       },
       {
-        "x": 480,
-        "y": 330,
-        "r": 68,
-        "goal": true
-      }
-    ],
-    "gravity": [
-      {
-        "x": 300,
-        "y": 280,
-        "r": 19,
-        "range": 155,
-        "force": 1000
-      }
-    ],
-    "obstacles": [
-      {
-        "x": 300,
-        "y": 385,
-        "r": 65
+        "x": 456,
+        "y": 283,
+        "r": 58,
+        "goal": true,
+        "move": {
+          "axis": "orbit",
+          "amp": 67,
+          "rate": 0.5,
+          "phase": 1.5
+        }
       }
     ],
     "starSpot": {
-      "x": 236.61,
-      "y": 293.27,
-      "r": 14
+      "x": 290.49,
+      "y": 324.88,
+      "r": 16
     }
   },
   {
@@ -822,7 +870,7 @@ const reviewStages=[
       {
         "x": 500,
         "y": 405,
-        "r": 52,
+        "r": 45,
         "goal": true
       }
     ],
@@ -855,14 +903,14 @@ const reviewStages=[
         "goal": true,
         "move": {
           "axis": "y",
-          "amp": 42,
-          "rate": 0.75
+          "amp": 65,
+          "rate": 1.06
         }
       }
     ],
     "starSpot": {
-      "x": 299.97,
-      "y": 276.69,
+      "x": 241.98,
+      "y": 275.53,
       "r": 14
     },
     "goalDeadline": 8
@@ -879,7 +927,7 @@ const reviewStages=[
       {
         "x": 420,
         "y": 330,
-        "r": 88,
+        "r": 81,
         "goal": true
       }
     ],
@@ -907,7 +955,7 @@ const reviewStages=[
       {
         "x": 570,
         "y": 515,
-        "r": 56,
+        "r": 49,
         "goal": true
       }
     ],
@@ -923,21 +971,19 @@ const reviewStages=[
     ],
     "obstacles": [
       {
-        "x": 335,
-        "y": 380,
-        "r": 48
-      },
-      {
-        "x": 355,
-        "y": 480,
-        "r": 65
+        "x": 353.5,
+        "y": 438.5,
+        "r": 66.5,
+        "ry": 106.5
       }
     ],
     "starSpot": {
       "x": 285.02,
       "y": 303.26,
       "r": 14
-    }
+    },
+    "goalDeadline": 6.283185307179586,
+    "goalDeadlineFrom": 1
   },
   {
     "name": "27 · 限时三段",
@@ -957,7 +1003,8 @@ const reviewStages=[
       {
         "x": 410,
         "y": 465,
-        "r": 50
+        "r": 50,
+        "orbitRate": 2.2
       },
       {
         "x": 575,
@@ -979,8 +1026,8 @@ const reviewStages=[
       }
     ],
     "starSpot": {
-      "x": 146.71,
-      "y": 227.81,
+      "x": 95.19,
+      "y": 291.55,
       "r": 14
     },
     "walls": [
@@ -1017,53 +1064,39 @@ const reviewStages=[
     ]
   },
   {
-    "name": "28 · 两路换挡",
+    "name": "28 · 追钥入轨",
     "nodes": [
       {
-        "x": 85,
-        "y": 352,
-        "r": 43
+        "x": 93,
+        "y": 370,
+        "r": 49
       },
       {
-        "x": 212,
-        "y": 158,
-        "r": 50,
-        "launchSeconds": 6
-      },
-      {
-        "x": 407,
-        "y": 135,
-        "r": 47
-      },
-      {
-        "x": 300,
-        "y": 531,
-        "r": 40,
+        "x": 310,
+        "y": 335,
+        "r": 36,
+        "key": "gold",
         "move": {
-          "axis": "x",
-          "amp": 32,
-          "rate": 0.6
+          "axis": "orbit",
+          "amp": 66,
+          "rate": 0.58,
+          "phase": 0.95
         }
       },
       {
-        "x": 542,
-        "y": 367,
-        "r": 51,
+        "x": 539,
+        "y": 363,
+        "r": 48,
         "goal": true
       }
     ],
-    "obstacles": [
-      {
-        "x": 315,
-        "y": 345,
-        "r": 110
-      }
-    ],
     "starSpot": {
-      "x": 104.06,
-      "y": 236.9,
+      "x": 167.7,
+      "y": 299.97,
       "r": 16
-    }
+    },
+    "goalKey": "gold",
+    "lockHint": "终点尚未解锁"
   },
   {
     "name": "29 · 弧线交会",
@@ -1076,18 +1109,18 @@ const reviewStages=[
       },
       {
         "x": 480,
-        "y": 330,
+        "y": 303,
         "r": 59,
         "move": {
           "axis": "y",
-          "amp": 38,
-          "rate": 0.7
+          "amp": 65,
+          "rate": 1.05
         }
       },
       {
         "x": 555,
         "y": 545,
-        "r": 52,
+        "r": 45,
         "goal": true
       }
     ],
@@ -1100,23 +1133,23 @@ const reviewStages=[
         "force": 1000
       }
     ],
-    "obstacles": [
-      {
-        "x": 300,
-        "y": 385,
-        "r": 65
-      },
-      {
-        "x": 330,
-        "y": 492,
-        "r": 64
-      }
-    ],
     "starSpot": {
-      "x": 279.18,
-      "y": 217.88,
+      "x": 182.77,
+      "y": 274.6,
       "r": 14
-    }
+    },
+    "walls": [
+      {
+        "a": {
+          "x": 449,
+          "y": 409
+        },
+        "b": {
+          "x": 449,
+          "y": 642
+        }
+      }
+    ]
   },
   {
     "name": "30 · 双星再会",
@@ -1125,7 +1158,8 @@ const reviewStages=[
       {
         "x": 90,
         "y": 420,
-        "r": 58
+        "r": 58,
+        "orbitRate": 2.2
       },
       {
         "x": 300,
@@ -1133,23 +1167,25 @@ const reviewStages=[
         "r": 74,
         "move": {
           "axis": "x",
-          "amp": 37,
+          "amp": 60,
           "rate": 0.55
-        }
+        },
+        "orbitRate": 2.2
       },
       {
         "x": 520,
         "y": 420,
-        "r": 69,
-        "goal": true
+        "r": 61,
+        "goal": true,
+        "orbitRate": 2.2
       }
     ],
     "twinOffset": 0.2546557930414639,
     "twinDistance": 16,
     "starSpot": {
-      "x": 172.26,
-      "y": 284.99,
-      "r": 14
+      "x": 104.29,
+      "y": 297.23,
+      "r": 16
     },
     "obstacles": [
       {
@@ -1170,17 +1206,19 @@ const reviewStages=[
       {
         "x": 235,
         "y": 520,
-        "r": 58
+        "r": 58,
+        "launchSeconds": 4.71238898038469
       },
       {
         "x": 350,
         "y": 180,
-        "r": 48
+        "r": 48,
+        "launchSeconds": 4.71238898038469
       },
       {
         "x": 550,
         "y": 450,
-        "r": 56,
+        "r": 48,
         "goal": true
       }
     ],
@@ -1208,9 +1246,9 @@ const reviewStages=[
       }
     ],
     "starSpot": {
-      "x": 219.2,
-      "y": 406.75,
-      "r": 16
+      "x": 199.8,
+      "y": 396.98,
+      "r": 14
     }
   },
   {
@@ -1222,19 +1260,19 @@ const reviewStages=[
         "r": 60
       },
       {
-        "x": 500,
-        "y": 320,
-        "r": 78
+        "x": 490,
+        "y": 295,
+        "r": 76
       },
       {
-        "x": 540,
-        "y": 130,
-        "r": 55
+        "x": 559,
+        "y": 151,
+        "r": 61
       },
       {
         "x": 260,
         "y": 125,
-        "r": 56,
+        "r": 48,
         "goal": true
       }
     ],
@@ -1247,16 +1285,10 @@ const reviewStages=[
         "force": -700
       }
     ],
-    "obstacles": [
-      {
-        "x": 300,
-        "y": 460,
-        "r": 45
-      }
-    ],
+    "obstacles": [],
     "starSpot": {
-      "x": 375.62,
-      "y": 322.66,
+      "x": 359.07,
+      "y": 333.49,
       "r": 14
     },
     "walls": [
@@ -1266,14 +1298,14 @@ const reviewStages=[
           "y": 255
         },
         "b": {
-          "x": 470,
+          "x": 447,
           "y": 255
         }
       }
     ]
   },
   {
-    "name": "33 · 半环绕行",
+    "name": "33 · 缺口绕行",
     "nodes": [
       {
         "x": 105,
@@ -1295,8 +1327,12 @@ const reviewStages=[
       {
         "x": 503,
         "y": 220,
-        "r": 54,
-        "goal": true
+        "r": 46,
+        "goal": true,
+        "entryArc": {
+          "angle": 1.23,
+          "span": 1.05
+        }
       }
     ],
     "obstacles": [
@@ -1339,12 +1375,17 @@ const reviewStages=[
       {
         "x": 515,
         "y": 540,
-        "r": 64
+        "r": 64,
+        "move": {
+          "axis": "x",
+          "amp": 35,
+          "rate": 0.72
+        }
       },
       {
         "x": 610,
         "y": 200,
-        "r": 60,
+        "r": 52,
         "goal": true
       }
     ],
@@ -1382,8 +1423,8 @@ const reviewStages=[
       }
     ],
     "starSpot": {
-      "x": 187.32,
-      "y": 368.07,
+      "x": 181.7,
+      "y": 394.6,
       "r": 14
     },
     "checkpointEnabled": true
@@ -1434,7 +1475,7 @@ const reviewStages=[
     ]
   },
   {
-    "name": "36 · 借板接力",
+    "name": "36 · 摇摆弹板",
     "nodes": [
       {
         "x": 80,
@@ -1444,13 +1485,17 @@ const reviewStages=[
       {
         "x": 500,
         "y": 400,
-        "r": 65
+        "r": 62
       },
       {
         "x": 365,
         "y": 587,
-        "r": 58,
-        "goal": true
+        "r": 50,
+        "goal": true,
+        "entryArc": {
+          "angle": -1,
+          "span": 1.2
+        }
       }
     ],
     "reflectors": [
@@ -1462,6 +1507,11 @@ const reviewStages=[
         "b": {
           "x": 470,
           "y": 160
+        },
+        "turn": {
+          "amp": 0.16,
+          "rate": 0.8,
+          "phase": 0.1
         }
       }
     ],
@@ -1473,8 +1523,8 @@ const reviewStages=[
       }
     ],
     "starSpot": {
-      "x": 209.64,
-      "y": 228.04,
+      "x": 179.88,
+      "y": 252.72,
       "r": 14
     },
     "walls": [
@@ -1518,7 +1568,7 @@ const reviewStages=[
       {
         "x": 100,
         "y": 140,
-        "r": 78,
+        "r": 70,
         "goal": true
       }
     ],
@@ -1577,7 +1627,7 @@ const reviewStages=[
       {
         "x": 540,
         "y": 300,
-        "r": 74,
+        "r": 66,
         "goal": true
       }
     ],
@@ -1602,6 +1652,28 @@ const reviewStages=[
         "x": 305,
         "y": 430,
         "r": 90
+      },
+      {
+        "x": 155,
+        "y": 275,
+        "r": 15,
+        "move": {
+          "axis": "orbit",
+          "amp": 110,
+          "rate": 0.8,
+          "phase": 1.8
+        }
+      },
+      {
+        "x": 430,
+        "y": 320,
+        "r": 14,
+        "move": {
+          "axis": "orbit",
+          "amp": 110,
+          "rate": 0.74,
+          "phase": 1.8
+        }
       }
     ],
     "starSpot": {
@@ -1616,7 +1688,8 @@ const reviewStages=[
       {
         "x": 80,
         "y": 420,
-        "r": 60
+        "r": 60,
+        "orbitRate": 1.75
       },
       {
         "x": 500,
@@ -1625,13 +1698,14 @@ const reviewStages=[
         "move": {
           "axis": "y",
           "amp": 85,
-          "rate": 0.5
+          "rate": 0.5,
+          "phase": 2.4
         }
       },
       {
         "x": 555,
         "y": 603,
-        "r": 60,
+        "r": 52,
         "goal": true
       }
     ],
@@ -1655,9 +1729,9 @@ const reviewStages=[
       }
     ],
     "starSpot": {
-      "x": 264.86,
-      "y": 213.83,
-      "r": 16
+      "x": 168.77,
+      "y": 226.21,
+      "r": 14
     },
     "walls": [
       {
@@ -1670,7 +1744,13 @@ const reviewStages=[
           "y": 595
         }
       }
-    ]
+    ],
+    "goalDeadline": 3.9269908169872414,
+    "goalDeadlineFrom": 1,
+    "required": [
+      1
+    ],
+    "lockHint": "先抵达中继星球"
   },
   {
     "name": "40 · 双星穿风",
@@ -1680,17 +1760,24 @@ const reviewStages=[
       {
         "x": 90,
         "y": 410,
-        "r": 58
+        "r": 58,
+        "orbitRate": 2.15
       },
       {
-        "x": 480,
+        "x": 400,
         "y": 300,
-        "r": 71
+        "r": 69,
+        "move": {
+          "axis": "x",
+          "amp": 27,
+          "rate": 0.63,
+          "phase": 1.5
+        }
       },
       {
         "x": 543,
-        "y": 526,
-        "r": 66,
+        "y": 565,
+        "r": 58,
         "goal": true
       }
     ],
@@ -1702,11 +1789,19 @@ const reviewStages=[
         "h": 340,
         "ax": 0,
         "ay": -65
+      },
+      {
+        "x": 465,
+        "y": 380,
+        "w": 115,
+        "h": 135,
+        "ax": -54,
+        "ay": 0
       }
     ],
     "starSpot": {
-      "x": 293.36,
-      "y": 296.36,
+      "x": 263.38,
+      "y": 285.09,
       "r": 14
     },
     "obstacles": [
@@ -1718,7 +1813,7 @@ const reviewStages=[
     ]
   },
   {
-    "name": "41 · 先上后下",
+    "name": "41 · 折跃换路",
     "nodes": [
       {
         "x": 60,
@@ -1728,22 +1823,24 @@ const reviewStages=[
       {
         "x": 215,
         "y": 540,
-        "r": 58
+        "r": 52
       },
       {
         "x": 385,
         "y": 180,
-        "r": 56
+        "r": 53,
+        "switch": "blue"
       },
       {
-        "x": 515,
-        "y": 540,
-        "r": 64
+        "x": 435,
+        "y": 510,
+        "r": 59,
+        "launchSeconds": 4.71238898038469
       },
       {
         "x": 610,
-        "y": 200,
-        "r": 60,
+        "y": 370,
+        "r": 52,
         "goal": true
       }
     ],
@@ -1761,16 +1858,6 @@ const reviewStages=[
       },
       {
         "a": {
-          "x": 480,
-          "y": 70
-        },
-        "b": {
-          "x": 480,
-          "y": 275
-        }
-      },
-      {
-        "a": {
           "x": 300,
           "y": 200
         },
@@ -1778,6 +1865,38 @@ const reviewStages=[
           "x": 300,
           "y": 650
         }
+      },
+      {
+        "a": {
+          "x": 500,
+          "y": 70
+        },
+        "b": {
+          "x": 500,
+          "y": 351
+        }
+      },
+      {
+        "a": {
+          "x": 300,
+          "y": 325
+        },
+        "b": {
+          "x": 500,
+          "y": 325
+        },
+        "switch": "blue"
+      },
+      {
+        "a": {
+          "x": 300,
+          "y": 70
+        },
+        "b": {
+          "x": 300,
+          "y": 200
+        },
+        "closedWhen": "blue"
       }
     ],
     "portals": [
@@ -1795,10 +1914,17 @@ const reviewStages=[
       }
     ],
     "starSpot": {
-      "x": 186.48,
-      "y": 368.7,
+      "x": 163.49,
+      "y": 466.69,
       "r": 14
-    }
+    },
+    "required": [
+      1,
+      2,
+      3
+    ],
+    "needPortal": true,
+    "checkpointEnabled": true
   },
   {
     "name": "42 · 绕行取钥",
@@ -1813,13 +1939,13 @@ const reviewStages=[
         "x": 300,
         "y": 570,
         "r": 48,
-        "launchSeconds": 8.5
+        "launchSeconds": 4.71238898038469
       },
       {
         "x": 499.2,
         "y": 455,
         "r": 48,
-        "launchSeconds": 8.5
+        "launchSeconds": 4.71238898038469
       },
       {
         "x": 499.2,
@@ -1831,12 +1957,12 @@ const reviewStages=[
         "x": 300,
         "y": 110,
         "r": 48,
-        "launchSeconds": 8.5
+        "launchSeconds": 4.71238898038469
       },
       {
         "x": 100.8,
         "y": 225,
-        "r": 62,
+        "r": 54,
         "goal": true
       }
     ],
@@ -1856,7 +1982,7 @@ const reviewStages=[
     "checkpointEnabled": true
   },
   {
-    "name": "43 · 取钥原路返回",
+    "name": "43 · 焚星返航",
     "goalKey": "gold",
     "nodes": [
       {
@@ -1868,7 +1994,8 @@ const reviewStages=[
         "x": 180,
         "y": 350,
         "r": 47,
-        "spin": -1
+        "spin": -1,
+        "fragile": true
       },
       {
         "x": 0,
@@ -1908,10 +2035,14 @@ const reviewStages=[
         }
       }
     ],
-    "lockHint": "先取得钥匙",
+    "lockHint": "先经中继取钥匙",
     "checkpointEnabled": true,
     "hideSpinGuide": true,
-    "precisionGoal": true
+    "precisionGoal": true,
+    "required": [
+      1,
+      2
+    ]
   },
   {
     "name": "44 · 两股风",
@@ -1939,7 +2070,7 @@ const reviewStages=[
       {
         "x": 50,
         "y": 200,
-        "r": 60,
+        "r": 52,
         "goal": true
       }
     ],
@@ -2002,48 +2133,84 @@ const reviewStages=[
     "checkpointEnabled": true
   },
   {
-    "name": "45 · 双星交会",
-    "twinDistance": 16,
-    "twinOffset": 0.2546557930414639,
+    "name": "45 · 换路闸阵",
     "nodes": [
       {
-        "x": 90,
-        "y": 420,
-        "r": 55,
-        "orbitRate": 1.7
+        "x": 105,
+        "y": 520,
+        "r": 55
       },
       {
-        "x": 300,
-        "y": 195,
-        "r": 63,
-        "move": {
-          "axis": "x",
-          "amp": 65,
-          "rate": 0.55
+        "x": 280,
+        "y": 510,
+        "r": 55,
+        "switch": "blue"
+      },
+      {
+        "x": 528,
+        "y": 240,
+        "r": 56,
+        "spin": -1,
+        "launchSeconds": 5
+      },
+      {
+        "x": 145,
+        "y": 149,
+        "r": 57,
+        "goal": true,
+        "entryArc": {
+          "angle": 0.2,
+          "span": 1.2
+        }
+      }
+    ],
+    "walls": [
+      {
+        "a": {
+          "x": 10,
+          "y": 323
+        },
+        "b": {
+          "x": 365,
+          "y": 323
         }
       },
       {
-        "x": 520,
-        "y": 420,
-        "r": 59,
-        "goal": true
-      }
-    ],
-    "obstacles": [
+        "a": {
+          "x": 365,
+          "y": 323
+        },
+        "b": {
+          "x": 520,
+          "y": 323
+        },
+        "switch": "blue"
+      },
       {
-        "x": 300,
-        "y": 420,
-        "r": 72
+        "a": {
+          "x": 209,
+          "y": 375
+        },
+        "b": {
+          "x": 209,
+          "y": 638
+        },
+        "closedWhen": "blue"
       }
     ],
+    "required": [
+      1,
+      2
+    ],
+    "lockHint": "先经过两颗中继",
     "starSpot": {
-      "x": 167.03,
-      "y": 283.29,
-      "r": 14
+      "x": 171.19,
+      "y": 458.38,
+      "r": 16
     }
   },
   {
-    "name": "46 · 弹板绕行",
+    "name": "46 · 途中开门",
     "nodes": [
       {
         "x": 240,
@@ -2094,6 +2261,17 @@ const reviewStages=[
           "x": 180,
           "y": 650
         }
+      },
+      {
+        "a": {
+          "x": 265,
+          "y": 75
+        },
+        "b": {
+          "x": 265,
+          "y": 220
+        },
+        "switch": "blue"
       }
     ],
     "reflectors": [
@@ -2112,7 +2290,17 @@ const reviewStages=[
       "x": 445.84,
       "y": 590.37,
       "r": 14
-    }
+    },
+    "flySwitches": [
+      {
+        "x": 355,
+        "y": 205,
+        "r": 27,
+        "switch": "blue"
+      }
+    ],
+    "goalSwitch": "blue",
+    "lockHint": "先穿过蓝色感应环"
   },
   {
     "name": "47 · 错位通行",
@@ -2144,7 +2332,7 @@ const reviewStages=[
       {
         "x": 520,
         "y": 540,
-        "r": 70,
+        "r": 62,
         "goal": true
       }
     ],
@@ -2183,86 +2371,92 @@ const reviewStages=[
     "hideSpinGuide": true
   },
   {
-    "name": "48 · 等到这一刻",
+    "name": "48 · 转折限时",
     "nodes": [
       {
-        "x": 60,
-        "y": 200,
-        "r": 52
+        "x": 105,
+        "y": 163,
+        "r": 53
       },
       {
-        "x": 215,
+        "x": 95,
+        "y": 404,
+        "r": 52,
+        "launchSeconds": 4.9
+      },
+      {
+        "x": 320,
         "y": 540,
-        "r": 58,
-        "launchSeconds": 4.5,
-        "spin": -1
-      },
-      {
-        "x": 385,
-        "y": 180,
-        "r": 56,
+        "r": 57,
+        "launchSeconds": 5.4,
         "move": {
-          "axis": "y",
-          "amp": 48,
-          "rate": 0.72
-        },
-        "launchSeconds": 6
+          "axis": "orbit",
+          "amp": 61,
+          "ampY": 34,
+          "rate": 0.66,
+          "phase": 0.48
+        }
       },
       {
-        "x": 515,
-        "y": 540,
-        "r": 64,
-        "launchSeconds": 4.5
+        "x": 558,
+        "y": 378,
+        "r": 55,
+        "spin": -1,
+        "launchSeconds": 4.8
       },
       {
-        "x": 610,
-        "y": 200,
-        "r": 60,
+        "x": 438,
+        "y": 130,
+        "r": 56,
         "goal": true
       }
     ],
-    "obstacles": [],
     "walls": [
       {
         "a": {
-          "x": 180,
-          "y": 70
+          "x": 213,
+          "y": 71
         },
         "b": {
-          "x": 180,
-          "y": 330
+          "x": 213,
+          "y": 410
         }
       },
       {
         "a": {
-          "x": 330,
-          "y": 350
+          "x": 220,
+          "y": 285
         },
         "b": {
-          "x": 330,
-          "y": 650
+          "x": 460,
+          "y": 285
         }
       },
       {
         "a": {
-          "x": 480,
-          "y": 70
+          "x": 427,
+          "y": 352
         },
         "b": {
-          "x": 480,
-          "y": 275
+          "x": 427,
+          "y": 432
         }
       }
     ],
+    "required": [
+      1,
+      2,
+      3
+    ],
+    "checkpointEnabled": true,
     "starSpot": {
-      "x": 187.32,
-      "y": 368.07,
-      "r": 14
-    },
-    "checkpointEnabled": true
+      "x": 153.84,
+      "y": 273.84,
+      "r": 16
+    }
   },
   {
-    "name": "49 · 折返斜板",
+    "name": "49 · 摆板折返",
     "goalKey": "gold",
     "lockHint": "先取得钥匙",
     "nodes": [
@@ -2276,13 +2470,18 @@ const reviewStages=[
         "x": 30,
         "y": 350,
         "r": 38,
-        "key": "gold"
+        "key": "gold",
+        "launchSeconds": 4.8
       },
       {
         "x": 550,
         "y": 220,
-        "r": 48,
-        "goal": true
+        "r": 49,
+        "goal": true,
+        "entryArc": {
+          "angle": 2.1,
+          "span": 1.2
+        }
       }
     ],
     "obstacles": [
@@ -2302,6 +2501,10 @@ const reviewStages=[
         "b": {
           "x": 650,
           "y": 530
+        },
+        "turn": {
+          "amp": 0.13,
+          "rate": 1.15
         }
       }
     ],

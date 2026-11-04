@@ -22,7 +22,7 @@ for(const width of [390,900]){
  elements.get('#pause').onclick();assert.equal(elements.get('#export').style.display,'inline-block');elements.get('#primary').onclick();assert.equal(elements.get('.overlay').style.display,'none');
  for(let i=1;i<49;i++)hook.completed[i]=1;
  delete hook.completed[41];
- hook.select(41);hook.action();hook.game().capture(1,0);frame(100);assert.equal(hook.game().current,1);hook.game().step=()=>hook.game().fail('碰撞');frame(120);assert.equal(elements.get('#primary').textContent,'从落点继续');elements.get('#primary').onclick();assert.equal(hook.game().current,1,'retry restores relay instead of start');assert.equal(hook.game().launchRemaining,8.5);assert.equal(hook.game().state,'playing');
+ hook.select(41);hook.action();hook.game().capture(1,0);frame(100);assert.equal(hook.game().current,1);hook.game().step=()=>hook.game().fail('碰撞');frame(120);assert.equal(elements.get('#primary').textContent,'从落点继续');elements.get('#primary').onclick();assert.equal(hook.game().current,1,'retry restores relay instead of start');assert.equal(hook.game().launchRemaining,stages[41].nodes[1].launchSeconds);assert.equal(hook.game().state,'playing');
  assert.equal(JSON.parse(saved.get('star-hop-review-20261027-wallet-permanent-v1')).used[41],1);
  hook.completed[41]=1;hook.select(49);hook.action();hook.game().capture(1,0);frame(140);hook.game().step=()=>hook.game().fail('碰撞');frame(160);assert.equal(elements.get('#primary').textContent,'↻');elements.get('#primary').onclick();assert.equal(hook.game().current,0,'three-jump level retries from start');
 }

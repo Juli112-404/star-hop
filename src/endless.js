@@ -5,8 +5,169 @@ const {OrbitGame}=isNode?require('./levels-engine.js'):root.OrbitEngine;
 const stages=isNode?require('./review-data.js'):root.PlanetLevels;
 const dt=1/120,tau=2*Math.PI,revivalCost=10;
 
+// Keep the endless layouts independent from campaign redesigns.
+const endlessLayouts={
+  "18": {"nodes":[{"x":115,"y":340,"r":70},{"x":390,"y":310,"r":61,"goal":true}]},
+  "14": {
+    "nodes": [
+      {
+        "x": 85,
+        "y": 360,
+        "r": 62
+      },
+      {
+        "x": 500,
+        "y": 360,
+        "r": 57,
+        "goal": true
+      }
+    ],
+    "obstacles": [
+      {
+        "x": 295,
+        "y": 360,
+        "r": 48,
+        "move": {
+          "axis": "y",
+          "amp": 110,
+          "rate": 1.1
+        }
+      }
+    ]
+  },
+  "29": {
+    "nodes": [
+      {
+        "x": 90,
+        "y": 420,
+        "r": 48
+      },
+      {
+        "x": 480,
+        "y": 330,
+        "r": 59,
+        "move": {
+          "axis": "y",
+          "amp": 38,
+          "rate": 0.7
+        }
+      },
+      {
+        "x": 555,
+        "y": 545,
+        "r": 45,
+        "goal": true
+      }
+    ],
+    "gravity": [
+      {
+        "x": 300,
+        "y": 280,
+        "r": 19,
+        "range": 155,
+        "force": 1000
+      }
+    ],
+    "obstacles": [
+      {
+        "x": 300,
+        "y": 385,
+        "r": 65
+      },
+      {
+        "x": 330,
+        "y": 492,
+        "r": 64
+      }
+    ]
+  },
+  "39": {
+    "nodes": [
+      {
+        "x": 80,
+        "y": 420,
+        "r": 60
+      },
+      {
+        "x": 500,
+        "y": 400,
+        "r": 69,
+        "move": {
+          "axis": "y",
+          "amp": 85,
+          "rate": 0.5
+        }
+      },
+      {
+        "x": 555,
+        "y": 603,
+        "r": 52,
+        "goal": true
+      }
+    ],
+    "obstacles": [
+      {
+        "x": 300,
+        "y": 410,
+        "r": 90
+      }
+    ],
+    "reflectors": [
+      {
+        "a": {
+          "x": 110,
+          "y": 160
+        },
+        "b": {
+          "x": 450,
+          "y": 160
+        }
+      }
+    ]
+  },
+  "40": {
+    "nodes": [
+      {
+        "x": 90,
+        "y": 410,
+        "r": 58
+      },
+      {
+        "x": 480,
+        "y": 300,
+        "r": 71
+      },
+      {
+        "x": 543,
+        "y": 526,
+        "r": 58,
+        "goal": true
+      }
+    ],
+    "wind": [
+      {
+        "x": 195,
+        "y": 180,
+        "w": 155,
+        "h": 340,
+        "ax": 0,
+        "ay": -65
+      }
+    ],
+    "obstacles": [
+      {
+        "x": 330,
+        "y": 468,
+        "r": 77
+      }
+    ],
+    "twinDistance": 16,
+    "twinOffset": 0.2546557930414639
+  }
+};
+
 function campaign(index,count){
-  const {nodes,gravity,wind,obstacles,reflectors,portals,twinDistance,twinOffset}=stages[index-1];
+  const {nodes,gravity,wind,obstacles,reflectors,portals,twinDistance,twinOffset}=endlessLayouts[index]||stages[index-1];
   return {nodes:nodes.slice(0,count??nodes.length).map((n,i)=>({...n,goal:i===(count??nodes.length)-1})),gravity,wind,obstacles,reflectors,portals,twinDistance,twinOffset};
 }
 const patterns=[
