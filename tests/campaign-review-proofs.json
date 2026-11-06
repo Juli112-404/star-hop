@@ -94,13 +94,13 @@
   "24": {
     "route": [
       {
-        "wait": 3.933333333333333,
+        "wait": 0.7333333333333333,
         "target": 1
       }
     ],
-    "successfulShotShare": 0.4,
-    "sampleCount": 20,
-    "centerDistance": 2.084,
+    "successfulShotShare": 0.429,
+    "sampleCount": 14,
+    "centerDistance": 0.004,
     "timingTolerance": 0.016666666666666666
   },
   "26": {
@@ -142,17 +142,21 @@
   "28": {
     "route": [
       {
-        "wait": 3.716666666666667,
+        "wait": 0.7166666666666667,
         "target": 1
       },
       {
-        "wait": 3.8833333333333333,
+        "wait": 5.25,
+        "target": 0
+      },
+      {
+        "wait": 3.283333333333333,
         "target": 2
       }
     ],
-    "successfulShotShare": 0.406,
-    "sampleCount": 32,
-    "centerDistance": 2.865,
+    "successfulShotShare": 0.407,
+    "sampleCount": 27,
+    "centerDistance": 2.285,
     "timingTolerance": 0.016666666666666666
   },
   "29": {

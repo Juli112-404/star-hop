@@ -44,7 +44,8 @@ for(const [n,relays] of [[31,[1,2]],[42,[1,2,4]]])for(const i of relays){
  tick(game,Math.ceil(node.launchSeconds/dt)+1);
  assert.equal(game.reason,'起跳时间已到');
 }
-const level3Baseline=[62,60,56];
+const level3Baseline=[62,56];
+assert.equal(get(3).nodes.length,2);
 for(const [i,n] of get(3).nodes.entries())assert(Math.abs(n.r**2/level3Baseline[i]**2-.5)<1e-9);
 for(const [n,i] of [[22,1],[28,1],[34,3]]){
  const p=get(n).nodes[i],a=Physics.position(p,0),b=Physics.position(p,1);
@@ -68,10 +69,14 @@ const stage43=replay(get(43),43);
 assert.deepEqual(stage43.map(g=>g.current),[1,2,0,3]);
 assert(stage43[1].consumed.has(1)&&stage43[2].keys.has('gold'));
 assert.equal(stage43.at(-1).state,'won');
+const stage23=new OrbitGame(get(23));
+assert(!stage23.goalReady(),'the blue ring is still required');
+stage23.switches.add('blue');
+assert(stage23.goalReady(),'opening the gate allows the goal without a relay visit');
 const stage45=new OrbitGame(get(45)),doors=stage45.level.walls.filter(w=>w.switch||w.closedWhen);
-assert.deepEqual(doors.map(w=>stage45.wallSolid(w)),[true,false]);
+assert.deepEqual(doors.map(w=>stage45.wallSolid(w)),[true]);
 stage45.capture(1,0);
-assert.deepEqual(doors.map(w=>stage45.wallSolid(w)),[false,true]);
+assert.deepEqual(doors.map(w=>stage45.wallSolid(w)),[false]);
 const stage46=replay(get(46),46);
 assert(stage46[0].reflections>0&&stage46.at(-1).switches.has('blue'));
 const blocked46=structuredClone(get(46));

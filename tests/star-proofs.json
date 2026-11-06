@@ -30,13 +30,13 @@
   {
     "route": [
       {
-        "wait": 4.3,
-        "target": 2
+        "wait": 4,
+        "target": 1
       }
     ],
-    "successfulShotShare": 0.389,
-    "sampleCount": 18,
-    "centerDistance": 3.734,
+    "successfulShotShare": 0.409,
+    "sampleCount": 22,
+    "centerDistance": 3.037,
     "timingTolerance": 0.016666666666666666
   },
   {
@@ -182,12 +182,12 @@
   {
     "route": [
       {
-        "wait": 0.7666666666666667,
+        "wait": 0.75,
         "target": 1
       }
     ],
-    "successfulShotShare": 0.381,
-    "sampleCount": 21,
+    "successfulShotShare": 0.389,
+    "sampleCount": 18,
     "centerDistance": 0.004,
     "timingTolerance": 0.016666666666666666
   },
@@ -302,29 +302,29 @@
   {
     "route": [
       {
-        "wait": 3.8833333333333333,
+        "wait": 0.75,
         "target": 1
       },
       {
-        "wait": 4.716666666666667,
+        "wait": 3.2,
         "target": 2
       }
     ],
-    "successfulShotShare": 0.4,
-    "sampleCount": 35,
-    "centerDistance": 2.081,
+    "successfulShotShare": 0.406,
+    "sampleCount": 32,
+    "centerDistance": 3.421,
     "timingTolerance": 0.016666666666666666
   },
   {
     "route": [
       {
-        "wait": 3.933333333333333,
+        "wait": 0.7333333333333333,
         "target": 1
       }
     ],
-    "successfulShotShare": 0.4,
-    "sampleCount": 20,
-    "centerDistance": 2.084,
+    "successfulShotShare": 0.429,
+    "sampleCount": 14,
+    "centerDistance": 0.004,
     "timingTolerance": 0.016666666666666666
   },
   {
@@ -378,17 +378,21 @@
   {
     "route": [
       {
-        "wait": 3.716666666666667,
+        "wait": 0.7166666666666667,
         "target": 1
       },
       {
-        "wait": 3.8833333333333333,
+        "wait": 5.25,
+        "target": 0
+      },
+      {
+        "wait": 3.283333333333333,
         "target": 2
       }
     ],
-    "successfulShotShare": 0.406,
-    "sampleCount": 32,
-    "centerDistance": 2.865,
+    "successfulShotShare": 0.407,
+    "sampleCount": 27,
+    "centerDistance": 2.285,
     "timingTolerance": 0.016666666666666666
   },
   {
@@ -486,25 +490,25 @@
   {
     "route": [
       {
-        "wait": 0.7833333333333333,
+        "wait": 0.8,
         "target": 1
       },
       {
-        "wait": 5.766666666666667,
+        "wait": 5.516666666666667,
         "target": 2
       },
       {
-        "wait": 4.55,
+        "wait": 4.566666666666666,
         "target": 3
       },
       {
-        "wait": 5.583333333333333,
+        "wait": 5.6,
         "target": 4
       }
     ],
-    "successfulShotShare": 0.429,
-    "sampleCount": 21,
-    "centerDistance": 0.004,
+    "successfulShotShare": 0.409,
+    "sampleCount": 22,
+    "centerDistance": 0.002,
     "timingTolerance": 0.016666666666666666
   },
   {
@@ -714,21 +718,21 @@
   {
     "route": [
       {
-        "wait": 0.6666666666666666,
+        "wait": 0.6833333333333333,
         "target": 1
       },
       {
-        "wait": 3.1666666666666665,
+        "wait": 6.166666666666667,
         "target": 2
       },
       {
-        "wait": 1.5333333333333334,
+        "wait": 2.4,
         "target": 3
       }
     ],
-    "successfulShotShare": 0.41,
-    "sampleCount": 61,
-    "centerDistance": 3.295,
+    "successfulShotShare": 0.396,
+    "sampleCount": 53,
+    "centerDistance": 2.225,
     "timingTolerance": 0.016666666666666666
   },
   {
@@ -758,15 +762,15 @@
         "target": 1
       },
       {
-        "wait": 3.8,
+        "wait": 3.783333333333333,
         "target": 2
       },
       {
-        "wait": 4.75,
+        "wait": 1.8166666666666667,
         "target": 3
       },
       {
-        "wait": 3.9583333333333335,
+        "wait": 3.183333333333333,
         "target": 4
       }
     ],

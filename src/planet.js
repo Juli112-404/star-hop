@@ -1,6 +1,7 @@
-const orbit=Arcade.mount('orbit-best-endless-v2','无尽');
+const judgeMode=globalThis.StarHopJudge===true;
+const orbit=Arcade.mount(judgeMode?'orbit-best-judge-v1':'orbit-best-endless-v2','无尽');
 const {Physics}=OrbitEngine;
-const walletKey='star-hop-endless-wallet-v1';
+const walletKey=judgeMode?'star-hop-judge-endless-wallet-v1':'star-hop-endless-wallet-v1';
 const walletLabel=document.querySelector('#wallet');
 let run,guide,guideAt=-1,camera=null,view=null;
 function loadWallet(){

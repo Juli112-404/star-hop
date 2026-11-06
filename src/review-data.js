@@ -18,7 +18,9 @@ const reviewStages=[
     "starSpot": {
       "x": 255.29,
       "y": 298.33,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     }
   },
   {
@@ -52,35 +54,46 @@ const reviewStages=[
     "starSpot": {
       "x": 173.87,
       "y": 241.84,
-      "r": 18
+      "r": 18,
+      "from": 0,
+      "landOn": 1
     }
   },
   {
-    "name": "03 · 自由选路",
-    "tag": "选路",
+    "name": "03 · 斜掠窄口",
+    "tag": "瞄准",
     "nodes": [
       {
-        "x": 80,
-        "y": 385,
+        "x": 125,
+        "y": 431,
         "r": 43.840620433565945
       },
       {
-        "x": 245,
-        "y": 185,
-        "r": 42.426406871192846
-      },
-      {
-        "x": 475,
-        "y": 370,
+        "x": 381,
+        "y": 343,
         "r": 39.59797974644666,
         "goal": true
       }
     ],
     "starSpot": {
-      "x": 302.74,
-      "y": 338.05,
-      "r": 14
-    }
+      "x": 307.84,
+      "y": 379.16,
+      "r": 14,
+      "from": 0,
+      "landOn": 1
+    },
+    "obstacles": [
+      {
+        "x": 230,
+        "y": 434,
+        "r": 41
+      },
+      {
+        "x": 310,
+        "y": 290,
+        "r": 39
+      }
+    ]
   },
   {
     "name": "04 · 借一道弧线",
@@ -117,7 +130,9 @@ const reviewStages=[
     "starSpot": {
       "x": 222.39,
       "y": 232.34,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     }
   },
   {
@@ -144,7 +159,9 @@ const reviewStages=[
     "starSpot": {
       "x": 262.45,
       "y": 329.34,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     }
   },
   {
@@ -187,7 +204,9 @@ const reviewStages=[
     "starSpot": {
       "x": 186.19,
       "y": 379.6,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     }
   },
   {
@@ -215,7 +234,9 @@ const reviewStages=[
     "starSpot": {
       "x": 245.47,
       "y": 424.54,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     },
     "wind": [
       {
@@ -272,7 +293,9 @@ const reviewStages=[
     "starSpot": {
       "x": 151.38,
       "y": 272.54,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     }
   },
   {
@@ -302,7 +325,9 @@ const reviewStages=[
     "starSpot": {
       "x": 247.99,
       "y": 337.58,
-      "r": 18
+      "r": 18,
+      "from": 0,
+      "landOn": 1
     },
     "walls": [
       {
@@ -325,7 +350,8 @@ const reviewStages=[
         "switch": "blue"
       }
     ],
-    "goalSwitch": "blue"
+    "goalSwitch": "blue",
+    "intro": "取钥匙，再穿过蓝圈开门。"
   },
   {
     "name": "10 · 弹板借道",
@@ -364,7 +390,9 @@ const reviewStages=[
     "starSpot": {
       "x": 273.82,
       "y": 206.61,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     }
   },
   {
@@ -387,7 +415,9 @@ const reviewStages=[
     "starSpot": {
       "x": 341.02,
       "y": 314.98,
-      "r": 18
+      "r": 18,
+      "from": 0,
+      "landOn": 1
     },
     "obstacles": [
       {
@@ -433,7 +463,9 @@ const reviewStages=[
     "starSpot": {
       "x": 246.87,
       "y": 393.95,
-      "r": 16
+      "r": 16,
+      "from": 0,
+      "landOn": 1
     },
     "walls": [
       {
@@ -484,15 +516,17 @@ const reviewStages=[
     "starSpot": {
       "x": 242.46,
       "y": 322.38,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     }
   },
   {
-    "name": "14 · 错峰通行",
+    "name": "14 · 环星避障",
     "tag": "起跳",
     "nodes": [
       {
-        "x": 85,
+        "x": 124,
         "y": 360,
         "r": 59
       },
@@ -505,20 +539,23 @@ const reviewStages=[
     ],
     "obstacles": [
       {
-        "x": 295,
+        "x": 124,
         "y": 360,
         "r": 54,
         "move": {
-          "axis": "y",
-          "amp": 110,
-          "rate": 1.1
+          "axis": "orbit",
+          "amp": 137,
+          "rate": 1.08,
+          "phase": 1.2
         }
       }
     ],
     "starSpot": {
-      "x": 389.14,
-      "y": 322.64,
-      "r": 16
+      "x": 369.6,
+      "y": 313.32,
+      "r": 16,
+      "from": 0,
+      "landOn": 1
     }
   },
   {
@@ -573,7 +610,9 @@ const reviewStages=[
     "starSpot": {
       "x": 298.27,
       "y": 213.28,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     }
   },
   {
@@ -604,7 +643,9 @@ const reviewStages=[
     "starSpot": {
       "x": 242.39,
       "y": 328.64,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     }
   },
   {
@@ -647,7 +688,9 @@ const reviewStages=[
     "starSpot": {
       "x": 73.84,
       "y": 266.06,
-      "r": 16
+      "r": 16,
+      "from": 0,
+      "landOn": 1
     }
   },
   {
@@ -669,7 +712,9 @@ const reviewStages=[
     "starSpot": {
       "x": 271.38,
       "y": 398.59,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     },
     "goalDeadline": 4.71238898038469,
     "reflectors": [
@@ -734,7 +779,9 @@ const reviewStages=[
     "starSpot": {
       "x": 173.87,
       "y": 241.84,
-      "r": 18
+      "r": 18,
+      "from": 0,
+      "landOn": 1
     }
   },
   {
@@ -772,7 +819,9 @@ const reviewStages=[
     "starSpot": {
       "x": 281.65,
       "y": 290.86,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     }
   },
   {
@@ -817,7 +866,9 @@ const reviewStages=[
     "starSpot": {
       "x": 237,
       "y": 304.08,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     }
   },
   {
@@ -845,75 +896,137 @@ const reviewStages=[
     "starSpot": {
       "x": 290.49,
       "y": 324.88,
-      "r": 16
+      "r": 16,
+      "from": 0,
+      "landOn": 1
     }
   },
   {
-    "name": "23 · 小型接力",
+    "name": "23 · 风中开闸",
     "tag": "衔接",
     "nodes": [
       {
-        "x": 90,
-        "y": 420,
-        "r": 58
+        "x": 82,
+        "y": 237,
+        "r": 57
       },
       {
-        "x": 265,
-        "y": 205,
-        "r": 54,
-        "move": {
-          "axis": "x",
-          "amp": 38,
-          "rate": 0.9
-        }
+        "x": 246,
+        "y": 510,
+        "r": 55
       },
       {
-        "x": 500,
-        "y": 405,
-        "r": 45,
+        "x": 522,
+        "y": 332,
+        "r": 51,
         "goal": true
       }
     ],
-    "obstacles": [
+    "obstacles": [],
+    "starSpot": {
+      "x": 222.7,
+      "y": 395.93,
+      "r": 14,
+      "from": 0,
+      "landOn": 1
+    },
+    "wind": [
       {
-        "x": 300,
-        "y": 420,
-        "r": 72
+        "x": 280,
+        "y": 330,
+        "w": 155,
+        "h": 194,
+        "ax": 0,
+        "ay": -475
       }
     ],
-    "starSpot": {
-      "x": 137.9,
-      "y": 287.84,
-      "r": 14
-    }
+    "flySwitches": [
+      {
+        "x": 359,
+        "y": 454,
+        "r": 22,
+        "switch": "blue"
+      }
+    ],
+    "walls": [
+      {
+        "a": {
+          "x": 277,
+          "y": 70
+        },
+        "b": {
+          "x": 277,
+          "y": 384
+        }
+      },
+      {
+        "a": {
+          "x": 450,
+          "y": 140
+        },
+        "b": {
+          "x": 450,
+          "y": 560
+        },
+        "switch": "blue"
+      }
+    ],
+    "goalSwitch": "blue",
+    "lockHint": "先穿过蓝圈开门",
+    "intro": "穿过蓝圈，打开蓝门。"
   },
   {
-    "name": "24 · 分秒交会",
+    "name": "24 · 限时穿缝",
     "tag": "起跳",
     "nodes": [
       {
-        "x": 115,
-        "y": 340,
-        "r": 62
+        "x": 85,
+        "y": 505,
+        "r": 61
       },
       {
-        "x": 465,
-        "y": 280,
+        "x": 432,
+        "y": 225,
         "r": 55,
         "goal": true,
         "move": {
-          "axis": "y",
-          "amp": 65,
-          "rate": 1.06
+          "axis": "x",
+          "amp": 45,
+          "rate": 1.05,
+          "phase": 1.3
         }
       }
     ],
     "starSpot": {
-      "x": 241.98,
-      "y": 275.53,
-      "r": 14
+      "x": 196.5,
+      "y": 344.82,
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     },
-    "goalDeadline": 8
+    "goalDeadline": 8,
+    "walls": [
+      {
+        "a": {
+          "x": 286,
+          "y": 78
+        },
+        "b": {
+          "x": 286,
+          "y": 230
+        }
+      },
+      {
+        "a": {
+          "x": 286,
+          "y": 410
+        },
+        "b": {
+          "x": 286,
+          "y": 630
+        }
+      }
+    ]
   },
   {
     "name": "25 · 双星同行",
@@ -936,7 +1049,9 @@ const reviewStages=[
     "starSpot": {
       "x": 235.65,
       "y": 278.8,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     }
   },
   {
@@ -980,7 +1095,9 @@ const reviewStages=[
     "starSpot": {
       "x": 285.02,
       "y": 303.26,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     },
     "goalDeadline": 6.283185307179586,
     "goalDeadlineFrom": 1
@@ -1028,7 +1145,9 @@ const reviewStages=[
     "starSpot": {
       "x": 95.19,
       "y": 291.55,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     },
     "walls": [
       {
@@ -1064,36 +1183,38 @@ const reviewStages=[
     ]
   },
   {
-    "name": "28 · 追钥入轨",
+    "name": "28 · 左旋取钥",
     "nodes": [
       {
-        "x": 93,
-        "y": 370,
+        "x": 341,
+        "y": 365,
         "r": 49
       },
       {
-        "x": 310,
-        "y": 335,
+        "x": 108,
+        "y": 345,
         "r": 36,
         "key": "gold",
         "move": {
           "axis": "orbit",
-          "amp": 66,
+          "amp": 47,
           "rate": 0.58,
           "phase": 0.95
         }
       },
       {
-        "x": 539,
-        "y": 363,
+        "x": 555,
+        "y": 265,
         "r": 48,
         "goal": true
       }
     ],
     "starSpot": {
-      "x": 167.7,
-      "y": 299.97,
-      "r": 16
+      "x": 271.08,
+      "y": 416.05,
+      "r": 16,
+      "from": 0,
+      "landOn": 1
     },
     "goalKey": "gold",
     "lockHint": "终点尚未解锁"
@@ -1136,7 +1257,9 @@ const reviewStages=[
     "starSpot": {
       "x": 182.77,
       "y": 274.6,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     },
     "walls": [
       {
@@ -1185,7 +1308,9 @@ const reviewStages=[
     "starSpot": {
       "x": 104.29,
       "y": 297.23,
-      "r": 16
+      "r": 16,
+      "from": 0,
+      "landOn": 1
     },
     "obstacles": [
       {
@@ -1248,7 +1373,9 @@ const reviewStages=[
     "starSpot": {
       "x": 199.8,
       "y": 396.98,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     }
   },
   {
@@ -1289,7 +1416,9 @@ const reviewStages=[
     "starSpot": {
       "x": 359.07,
       "y": 333.49,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     },
     "walls": [
       {
@@ -1346,7 +1475,9 @@ const reviewStages=[
     "starSpot": {
       "x": 211.31,
       "y": 517.04,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     }
   },
   {
@@ -1360,7 +1491,13 @@ const reviewStages=[
       {
         "x": 215,
         "y": 540,
-        "r": 58
+        "r": 58,
+        "move": {
+          "axis": "orbit",
+          "amp": 30,
+          "rate": 0.66,
+          "phase": 0.8
+        }
       },
       {
         "x": 385,
@@ -1423,9 +1560,11 @@ const reviewStages=[
       }
     ],
     "starSpot": {
-      "x": 181.7,
-      "y": 394.6,
-      "r": 14
+      "x": 182.22,
+      "y": 394.28,
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     },
     "checkpointEnabled": true
   },
@@ -1461,7 +1600,9 @@ const reviewStages=[
     "starSpot": {
       "x": 180.72,
       "y": 213.2,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     },
     "wind": [
       {
@@ -1525,7 +1666,9 @@ const reviewStages=[
     "starSpot": {
       "x": 179.88,
       "y": 252.72,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     },
     "walls": [
       {
@@ -1608,7 +1751,9 @@ const reviewStages=[
     "starSpot": {
       "x": 170.7,
       "y": 482.09,
-      "r": 16
+      "r": 16,
+      "from": 0,
+      "landOn": 1
     }
   },
   {
@@ -1679,7 +1824,9 @@ const reviewStages=[
     "starSpot": {
       "x": 127.11,
       "y": 324,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     }
   },
   {
@@ -1731,7 +1878,9 @@ const reviewStages=[
     "starSpot": {
       "x": 168.77,
       "y": 226.21,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     },
     "walls": [
       {
@@ -1802,7 +1951,9 @@ const reviewStages=[
     "starSpot": {
       "x": 263.38,
       "y": 285.09,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     },
     "obstacles": [
       {
@@ -1916,7 +2067,9 @@ const reviewStages=[
     "starSpot": {
       "x": 163.49,
       "y": 466.69,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     },
     "required": [
       1,
@@ -1977,7 +2130,9 @@ const reviewStages=[
     "starSpot": {
       "x": 230.58,
       "y": 538.61,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     },
     "checkpointEnabled": true
   },
@@ -2021,7 +2176,9 @@ const reviewStages=[
     "starSpot": {
       "x": 289.96,
       "y": 402.07,
-      "r": 16
+      "r": 16,
+      "from": 0,
+      "landOn": 1
     },
     "obstacles": [
       {
@@ -2128,7 +2285,9 @@ const reviewStages=[
     "starSpot": {
       "x": 570.48,
       "y": 408.77,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     },
     "checkpointEnabled": true
   },
@@ -2143,15 +2302,21 @@ const reviewStages=[
       {
         "x": 280,
         "y": 510,
-        "r": 55,
+        "r": 47,
         "switch": "blue"
       },
       {
         "x": 528,
         "y": 240,
-        "r": 56,
+        "r": 48,
         "spin": -1,
-        "launchSeconds": 5
+        "launchSeconds": 4.7,
+        "move": {
+          "axis": "x",
+          "amp": 30,
+          "rate": 0.82,
+          "phase": 0.35
+        }
       },
       {
         "x": 145,
@@ -2160,7 +2325,7 @@ const reviewStages=[
         "goal": true,
         "entryArc": {
           "angle": 0.2,
-          "span": 1.2
+          "span": 0.72
         }
       }
     ],
@@ -2185,17 +2350,6 @@ const reviewStages=[
           "y": 323
         },
         "switch": "blue"
-      },
-      {
-        "a": {
-          "x": 209,
-          "y": 375
-        },
-        "b": {
-          "x": 209,
-          "y": 638
-        },
-        "closedWhen": "blue"
       }
     ],
     "required": [
@@ -2204,9 +2358,11 @@ const reviewStages=[
     ],
     "lockHint": "先经过两颗中继",
     "starSpot": {
-      "x": 171.19,
-      "y": 458.38,
-      "r": 16
+      "x": 174.18,
+      "y": 461.75,
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     }
   },
   {
@@ -2289,7 +2445,9 @@ const reviewStages=[
     "starSpot": {
       "x": 445.84,
       "y": 590.37,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     },
     "flySwitches": [
       {
@@ -2300,7 +2458,8 @@ const reviewStages=[
       }
     ],
     "goalSwitch": "blue",
-    "lockHint": "先穿过蓝色感应环"
+    "lockHint": "先穿过蓝色感应环",
+    "intro": "穿过蓝圈，打开蓝门。"
   },
   {
     "name": "47 · 错位通行",
@@ -2319,9 +2478,15 @@ const reviewStages=[
       },
       {
         "x": 330,
-        "y": 120,
+        "y": 138,
         "r": 58,
-        "key": "gold"
+        "key": "gold",
+        "move": {
+          "axis": "orbit",
+          "amp": 28,
+          "rate": 0.7,
+          "phase": 1.2
+        }
       },
       {
         "x": 550,
@@ -2366,7 +2531,9 @@ const reviewStages=[
     "starSpot": {
       "x": 28.49,
       "y": 388.76,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     },
     "hideSpinGuide": true
   },
@@ -2452,7 +2619,9 @@ const reviewStages=[
     "starSpot": {
       "x": 153.84,
       "y": 273.84,
-      "r": 16
+      "r": 16,
+      "from": 0,
+      "landOn": 1
     }
   },
   {
@@ -2511,7 +2680,9 @@ const reviewStages=[
     "starSpot": {
       "x": 129.5,
       "y": 393.64,
-      "r": 16
+      "r": 16,
+      "from": 0,
+      "landOn": 1
     },
     "precisionGoal": true
   },
@@ -2588,7 +2759,9 @@ const reviewStages=[
     "starSpot": {
       "x": 161.29,
       "y": 246.86,
-      "r": 14
+      "r": 14,
+      "from": 0,
+      "landOn": 1
     },
     "flightTimeout": false,
     "hideSpinGuide": true
