@@ -3,6 +3,8 @@
 const isNode=typeof module!=='undefined'&&module.exports;
 const {OrbitGame}=isNode?require('./levels-engine.js'):root.OrbitEngine;
 const dt=1/120,tau=2*Math.PI,revivalCost=10;
+const warmupHops=3;
+const warmupRadii=[90,66,46];
 
 // Keep the endless layouts independent from campaign redesigns.
 const endlessLayouts={
@@ -356,24 +358,24 @@ function layout(index,count){
 }
 const patterns=[
   ['direct',0,()=>({nodes:[{x:105,y:345},{x:405,y:345,goal:true}]})],
-  ['moving',8,()=>layout(5)],['reverse',9,()=>{const level=layout(1);level.nodes[0].spin=-1;return level}],
-  ['portal',12,()=>layout(6)],['bounce',13,()=>layout(10)],['timer',10,()=>layout(1)],
-  ['gravity',15,()=>layout(4)],['wind',16,()=>layout(20)],['sweep',14,()=>layout(14)],
-  ['fork',11,()=>({nodes:[{x:100,y:350},{x:390,y:200,goal:true},{x:440,y:485,goal:true}]})],
-  ['window',18,()=>{const level=layout(18);level.nodes[1].window={period:4,open:2.6};return level}],['repel',19,()=>({"nodes":[{"x":80,"y":420,"r":60},{"x":500,"y":320,"r":78,"goal":true}],"gravity":[{"x":300,"y":400,"r":20,"range":150,"force":-700}],"obstacles":[{"x":300,"y":460,"r":45}]})],['twins',21,()=>layout(25)],
-  ['lock',20,()=>({
+  ['moving',3,()=>layout(5)],['reverse',3,()=>{const level=layout(1);level.nodes[0].spin=-1;return level}],
+  ['portal',7,()=>layout(6)],['bounce',8,()=>layout(10)],['timer',5,()=>layout(1)],
+  ['gravity',10,()=>layout(4)],['wind',11,()=>layout(20)],['sweep',9,()=>layout(14)],
+  ['fork',3,()=>({nodes:[{x:100,y:350},{x:390,y:200,goal:true},{x:440,y:485,goal:true}]})],
+  ['window',13,()=>{const level=layout(18);level.nodes[1].window={period:4,open:2.6};return level}],['repel',14,()=>({"nodes":[{"x":80,"y":420,"r":60},{"x":500,"y":320,"r":78,"goal":true}],"gravity":[{"x":300,"y":400,"r":20,"range":150,"force":-700}],"obstacles":[{"x":300,"y":460,"r":45}]})],['twins',16,()=>layout(25)],
+  ['lock',15,()=>({
     nodes:[{x:95,y:355},{x:460,y:350,goal:true}],
     flightKey:{x:280,y:350,r:43},goalKey:'gold',lockHint:'先穿过钥匙，再抵达终点'
   })],
-  ['wall',17,()=>({
+  ['wall',3,()=>({
     nodes:[{x:100,y:365},{x:500,y:360,goal:true}],
     walls:[{a:{x:300,y:280},b:{x:300,y:370}}]
   })],
-  ['movingBounce',23,()=>layout(39,2)],['movingGravity',25,()=>{const level=layout(29,2);level.obstacles=level.obstacles.slice(0,1);return level}],
-  ['twinWind',28,()=>{const level=layout(40,2);delete level.obstacles;return level}],
-  ['timedPortal',24,()=>layout(6)],['timedMoving',22,()=>layout(5)],
-  ['reverseWind',26,()=>{const level=layout(20);level.nodes[0].spin=-1;return level}]
-].map(([id,unlock,make])=>({id,unlock:id==='direct'?0:unlock-5,make}));
+  ['movingBounce',18,()=>layout(39,2)],['movingGravity',20,()=>{const level=layout(29,2);level.obstacles=level.obstacles.slice(0,1);return level}],
+  ['twinWind',23,()=>{const level=layout(40,2);delete level.obstacles;return level}],
+  ['timedPortal',19,()=>layout(6)],['timedMoving',17,()=>layout(5)],
+  ['reverseWind',21,()=>{const level=layout(20);level.nodes[0].spin=-1;return level}]
+].map(([id,unlock,make])=>({id,unlock,make}));
 
 const families={
   timedMoving:'moving',timedPortal:'portal',movingBounce:'bounce',
@@ -392,10 +394,12 @@ function shuffle(items,random){
 
 function difficulty(hops){
   const tier=Math.min(10,Math.floor(hops/5));
-  return {tier,radius:hops<3?72-4*hops:64-Math.round(2.2*tier),rate:1.38+.025*tier};
+  return {tier,radius:64-Math.round(2.2*tier),rate:1.38+.025*tier};
 }
-function build(pattern,hops,sourceRadius,mirrored,variation=0){
-  const {radius,rate}=difficulty(hops);
+function build(pattern,hops,sourceRadius,mirrored,variation=0,geometry){
+  const difficultyAtHop=difficulty(hops);
+  const radius=geometry?.radius??difficultyAtHop.radius;
+  const {rate}=difficultyAtHop;
   const level=structuredClone(pattern.make());
   level.pattern=pattern.id;
   const source=level.nodes[0];
@@ -406,9 +410,8 @@ function build(pattern,hops,sourceRadius,mirrored,variation=0){
   const target=level.nodes[1];
   const sizeChange=(72-radius)/30;
   if(pattern.id==='direct'){
-    const distance=230+Math.min(8,hops)*14+Math.max(0,Math.min(42,hops-8))*2;
-    const spread=.16+Math.min(hops,8)*.067;
-    const angle=(variation*2-1)*spread;
+    const distance=geometry?.distance??230+Math.min(8,hops)*14+Math.max(0,Math.min(42,hops-8))*2;
+    const angle=geometry?.angle??(variation*2-1)*(.16+Math.min(hops,8)*.067);
     target.x=source.x+Math.cos(angle)*distance;
     target.y=source.y+Math.sin(angle)*distance;
   }else if(!pattern.id.startsWith('timed')){
@@ -430,7 +433,10 @@ function build(pattern,hops,sourceRadius,mirrored,variation=0){
   if(level.twinOffset)level.twinDistance=Math.max(8,Math.min(level.twinDistance,Math.round(radius*.2)));
   if(mirrored&&!level.twinOffset){
     const flip=p=>p.x=600-p.x;
-    for(const n of level.nodes){flip(n);n.spin=-(n.spin||1)}
+    for(const n of level.nodes){
+      flip(n);
+      if(pattern.id!=='direct')n.spin=-(n.spin||1);
+    }
     for(const p of [...level.obstacles||[],...level.gravity||[]])flip(p);
     if(level.flightKey)flip(level.flightKey);
     for(const p of [...level.walls||[],...level.reflectors||[]]){flip(p.a);flip(p.b)}
@@ -483,7 +489,12 @@ function placeStar(game,proof){
 class EndlessRun{
   constructor(random=Math.random){
     this.random=random;this.hops=0;this.game=null;this.credited=false;
-    this.deck=[];this.unlockedFamilies=new Set();this.lastFamily=null;this.directStreak=0;
+    this.deck=[];this.unlockedFamilies=new Set();this.lastFamily=null;this.lastWasDirect=false;
+    this.warmup={
+      radii:shuffle(warmupRadii,random),
+      distances:shuffle([208,260,320],random),
+      angles:shuffle([-.46,0,.46],random)
+    };
   }
   get score(){return this.hops*10}
   mechanicChoices(){
@@ -508,17 +519,36 @@ class EndlessRun{
     return this.deck.filter(family=>family!==this.lastFamily)
       .flatMap(family=>shuffle(byFamily.get(family),this.random));
   }
+  directGeometry(sourceRadius){
+    const jitter=range=>(this.random()*2-1)*range;
+    const choose=items=>items[Math.floor(this.random()*items.length)];
+    const {hops}=this;
+    const warmup=hops<warmupHops;
+    const radius=warmup?this.warmup.radii[hops]+Math.round(jitter(3)):
+      Math.max(42,difficulty(hops).radius+choose([-7,0,7]));
+    const distance=warmup?this.warmup.distances[hops]+jitter(10):
+      260+Math.min(hops,36)*2+choose([-54,0,58])+jitter(12);
+    return {
+      radius,
+      distance:Math.max(distance,sourceRadius+radius+64),
+      angle:warmup?this.warmup.angles[hops]+jitter(.065):jitter(.56)
+    };
+  }
   next(anchor={x:0,y:0,r:76}){
     const withStar=this.random()<.2;
     const direct=patterns[0];
-    const baseJump=this.hops<3||(this.hops>3&&this.directStreak<2&&this.random()<.25);
+    const baseJump=this.hops<warmupHops||
+      (this.hops>=2*warmupHops&&!this.lastWasDirect&&this.random()<.22);
     const choices=baseJump?[direct]:[...this.mechanicChoices(),direct];
     const variation=this.random();
-    const mirror=this.hops>8&&this.random()<.12;
+    const mirrorRoll=this.random();
     for(const pattern of choices){
-      const options=pattern===direct?[variation]:[variation,0];
+      const isDirect=pattern===direct;
+      const geometry=isDirect?this.directGeometry(anchor.r):undefined;
+      const mirror=isDirect?mirrorRoll<.5:this.hops>8&&mirrorRoll<.12;
+      const options=isDirect?[variation]:[variation,0];
       for(const shape of options){
-        const game=new OrbitGame(build(pattern,this.hops,anchor.r,mirror,shape));
+        const game=new OrbitGame(build(pattern,this.hops,anchor.r,mirror,shape,geometry));
         if(Number.isFinite(anchor.angle)){game.angle=anchor.angle;game.ball=game.orbitPoint()}
         const proof=findShot(game);
         if(!proof)continue;
@@ -526,10 +556,8 @@ class EndlessRun{
         const source=game.node(0);
         this.origin={x:anchor.x-source.x,y:anchor.y-source.y};
         this.startAngle=game.angle;
-        if(pattern===direct){
-          this.directStreak++;
-          this.lastFamily=null;
-        }else{
+        this.lastWasDirect=isDirect;
+        if(!isDirect){
           const family=familyOf(pattern);
           this.deck.splice(this.deck.indexOf(family),1);
           this.lastFamily=family;
