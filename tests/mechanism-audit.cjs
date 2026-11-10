@@ -3,14 +3,14 @@ function shot(g){const q=g.clone();q.action();let startAngle=Math.atan2(q.ball.v
 function options(g,target,horizon=4.6){const out=[],w=g.clone();let run=0,best=0;for(let f=0;f<horizon*120&&w.state==='playing';f++){const q=shot(w);if(q.g.state!=='dead'&&q.g.current===target&&!q.g.inTransit){out.push({wait:f/120,...q});run++;best=Math.max(best,run)}else run=0;w.step(1/120)}return{out,best:best/120}}
 // 37: the approach orbit must be outside the central obstacle; broad portal window.
 let g=new OrbitGame(stages[36]);g=options(g,1).out[Math.floor(options(g,1).out.length/2)].g;const p=options(g,2);assert(p.best>=.18);assert(p.out.every(s=>s.g.portalEvents.some(e=>e.index===0)));const noPortal={...stages[36],portals:[]};let g0=new OrbitGame(noPortal);g0.current=g.current;g0.angle=g.angle;g0.ball=g0.orbitPoint();assert.equal(options(g0,2).out.length,0);console.log('PASS 37 portal window',p.best.toFixed(3));
-// 42: decorative fields removed. 45: arrival switches the gate and the goal has an entry arc.
-assert.equal(stages[41].gravity.length,0);assert(stages[44].nodes.some(n=>n.switch));assert(stages[44].nodes.at(-1).entryArc);
+// 42: decorative fields removed. 45: the same relay can open either exit.
+assert.equal(stages[41].gravity.length,0);assert(stages[44].nodes[1].landingExits);assert.equal(stages[44].walls.filter(w=>w.switch).length,2);
 // 44: the wind visibly bends winning paths through both zones.
 const windy=stages[43];g=new OrbitGame(windy);
 for(const [i,{wait,target}] of windy.starProof.route.entries()){
  for(let f=0;f<Math.round(wait*120);f++)g.step(1/120);
  const transfer=shot(g);assert.equal(transfer.g.current,target);
- if(i===0||i===2)assert(transfer.deflection>=Math.PI/15);
+ if(i<2)assert(transfer.deflection>=Math.PI/15);
  g=transfer.g;
 }
 assert.equal(g.state,'won');
@@ -18,8 +18,19 @@ assert.equal(g.state,'won');
 assert.equal(stages[45].nodes.length,4);
 assert(!stages[45].goalKey&&!stages[45].nodes.some(n=>n.key));
 g=new OrbitGame(stages[45]);let first=options(g,1);assert(first.out.length&&first.out.every(s=>s.g.reflections>=1));assert.equal(options(new OrbitGame({...stages[45],reflectors:[]}),1).out.length,0);g=first.out[Math.floor(first.out.length/2)].g;assert.equal(options(g,3).out.length,0,'remaining upper relay cannot be bypassed');let middle=options(g,2);assert(middle.out.length);g=middle.out[Math.floor(middle.out.length/2)].g;assert(options(g,3).best>=.075);console.log('PASS 46 reflection required and upper relay cannot be bypassed');
-// 47: moving obstacles + reverse spin, no gravity decoration.
-assert(!stages[46].gravity);assert(stages[46].obstacles.filter(o=>o.move).length===2);
+// 47: the return leg from the orbiting key leads to a gravity bend.
+const curve=stages[46];
+g=new OrbitGame(curve);
+assert(curve.nodes.some(n=>n.key&&n.move?.axis==='orbit'));
+for(const {wait,target} of curve.starProof.route.slice(0,-1)){
+ for(let f=0;f<Math.round(wait*120);f++)g.step(1/120);
+ g=shot(g).g;assert.equal(g.current,target);
+}
+const around=options(g,4);
+assert(around.best>=.075);
+assert(around.out.every(s=>s.g.gravityUsed&&s.deflection>.55));
+g.level={...curve,gravity:[]};
+assert.equal(options(g,4).out.length,0);
 // 48: arrival starts a real departure timer; flight and pause do not drain it.
 assert(!stages[47].nodes[4].window);g=new OrbitGame(stages[47]);const relayDeadline=g.level.nodes[1].launchSeconds;assert.equal(relayDeadline,4.9);g.capture(1,0);assert.equal(g.launchRemaining,relayDeadline);g.state='paused';g.step(10);assert.equal(g.launchRemaining,relayDeadline);g.state='playing';for(let i=0;i<=Math.ceil(relayDeadline*120);i++)g.step(1/120);assert.equal(g.state,'dead');assert.equal(g.reason,'起跳时间已到');
 // 49: upper-left vertical wall has been removed.

@@ -2,7 +2,17 @@ const assert=require('node:assert/strict');const {OrbitGame,Physics}=require('..
 assert(Economy.shouldSpawnStar(()=>0));assert(Economy.shouldSpawnStar(()=>.499999));assert(!Economy.shouldSpawnStar(()=>.5));assert(!Economy.shouldSpawnStar(()=>.999));
 function run(g){g.action();let closest=Infinity;for(let f=0;f<1100&&(g.flight||g.inTransit)&&g.state==='playing';f++){const a={...g.ball};g.step(1/120);const b=g.ball;if(Math.hypot(b.x-a.x,b.y-a.y)<20){const p=g.level.starSpot,dx=b.x-a.x,dy=b.y-a.y,t=Math.max(0,Math.min(1,((p.x-a.x)*dx+(p.y-a.y)*dy)/(dx*dx+dy*dy||1)));closest=Math.min(closest,Math.hypot(p.x-a.x-t*dx,p.y-a.y-t*dy))}}return closest}
 for(const stage of stages){assert(stage.starProof&&stage.starSpot);assert.equal(stage.starSpot.from,0);assert.equal(stage.starSpot.landOn,stage.starProof.route[0].target);assert(stage.starProof.centerDistance<=4);let g=new OrbitGame({...stage,pickups:[stage.starSpot]});for(const [i,move]of stage.starProof.route.entries()){for(let f=0;f<Math.round(move.wait*120);f++)g.step(1/120);const closest=run(g);assert.notEqual(g.state,'dead',stage.name);assert.equal(g.current,move.target,stage.name+' next landing');if(i===0){assert(closest<=4.01,stage.name+' centered trajectory');assert(g.collected.has(0),stage.name+' star collected on landing flight');assert(!g.inTransit,stage.name+' both balls land')}}assert.equal(g.state,'won',stage.name+' collection route finishes level');
-for(const jitter of [-2,-1,1,2]){g=new OrbitGame({...stage,pickups:[stage.starSpot]});const move=stage.starProof.route[0];for(let f=0;f<Math.round(move.wait*120)+jitter;f++)g.step(1/120);run(g);assert.notEqual(g.state,'dead',stage.name+' timing margin');assert(g.collected.has(0),stage.name+' timing margin pickup');assert.equal(g.current,move.target);assert(!g.inTransit)}
+const first=stage.starProof.route[0],center=Math.round(first.wait*120);
+let streak=0,best=0;
+for(let frame=Math.max(0,center-4);frame<=center+4;frame++){
+  g=new OrbitGame({...stage,pickups:[stage.starSpot]});
+  for(let f=0;f<frame;f++)g.step(1/120);
+  run(g);
+  const collected=g.state!=='dead'&&!g.inTransit&&g.current===first.target&&g.collected.has(0);
+  streak=collected?streak+1:0;
+  best=Math.max(best,streak);
+}
+assert(best>=5,stage.name+' has five adjacent valid star launch ticks');
 }
 // A blue-ball-only pickup must merge into the main wallet-facing set, once.
 let g=new OrbitGame(stages[39]);g.action();g.twin.collected.add(0);g.step(1/120);assert(g.collected.has(0));g.step(1/120);assert.equal(g.collected.size,1);

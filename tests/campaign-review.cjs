@@ -1,24 +1,44 @@
 const assert=require('node:assert/strict');
 const {OrbitGame}=require('../src/levels-engine');
 const levels=require('../src/review-data');
-const proofs=require('./campaign-review-proofs.json');
+const routes=require('./campaign-review-proofs.json');
+const proofs=require('./star-proofs.json');
 const dt=1/120;
 function fly(game){
   game.action();
   for(let i=0;i<1000&&(game.flight||game.inTransit)&&game.state==='playing';i++)game.step(dt);
   return game;
 }
-for(const [number,proof] of Object.entries(proofs)){
-  const level=levels[number-1],game=new OrbitGame({...level,pickups:[level.starSpot]});
-  for(const [index,{wait,target}] of proof.route.entries()){
+function follow(level,route,verifyExit=false){
+  const game=new OrbitGame(level);
+  for(const {wait,target,exit} of route){
     for(let f=0;f<Math.round(wait/dt);f++)game.step(dt);
+    if(verifyExit&&exit){
+      const before=[...game.switches];
+      assert.equal(game.preview(level.previewSeconds).landingExit,exit);
+      assert.deepEqual([...game.switches],before);
+    }
     fly(game);
-    assert.notEqual(game.state,'dead',level.name);
-    assert.equal(game.current,target,level.name);
-    if(index===0)assert(game.collected.has(0),level.name);
+    if(verifyExit&&exit){
+      const {upper,lower}=level.nodes[target].landingExits;
+      assert.deepEqual([upper,lower].filter(key=>game.switches.has(key)),[exit]);
+    }
+    if(game.current!==target||game.state==='dead'||game.flight||game.inTransit)return false;
   }
-  assert.equal(game.state,'won',level.name);
+  return game.state==='won';
 }
+for(const [number,options] of Object.entries(routes)){
+  const level=levels[number-1];
+  for(const option of options)assert(follow(level,option,true),level.name+' branch reaches the goal');
+}
+for(const number of [12,24,33,48]){
+  const level=levels[number-1],route=proofs[number-1].route;
+  assert(follow(level,route),level.name);
+  const walls=level.walls.map(w=>w.cycle?{...w,cycle:undefined}:w);
+  assert(!follow({...level,walls},route),level.name+' must use the timed gate');
+}
+assert(!follow({...levels[30],wind:[]},routes[31][1]),'lower exit needs the wind');
+assert(!follow({...levels[35],reflectors:levels[35].reflectors.slice(0,1)},proofs[35].route),'stage 36 uses both boards');
 for(const number of [18,24]){
   const level=levels[number-1],deadline=level.goalDeadline;
   for(const airborne of [false,true]){
@@ -33,7 +53,7 @@ for(const number of [18,24]){
   assert.equal(paused.time,0);
   assert(!level.nodes[1].window);
 }
-for(const [number,minHops] of [[12,2],[13,2],[26,2],[27,3],[29,2],[30,2],[32,3],[33,3],[35,2],[36,2],[39,2],[40,2]]){
+for(const [number,minHops] of [[5,2],[12,2],[13,2],[16,2],[20,2],[21,2],[22,2],[26,2],[27,2],[29,2],[30,2],[32,3],[33,3],[35,2],[36,2],[39,2],[40,2]]){
   const level=levels[number-1];
   let states=[new OrbitGame(level)];
   for(let hop=1;hop<minHops;hop++){
@@ -56,7 +76,7 @@ for(const [number,minHops] of [[12,2],[13,2],[26,2],[27,3],[29,2],[30,2],[32,3],
     states=next;
   }
 }
-console.log('PASS updated campaign routes, stars, hard deadlines and sampled minimum hop counts');
+console.log('PASS alternate routes, landing exits, required gates, hard deadlines and sampled minimum hop counts');
 
 const roundTrip=new OrbitGame({...levels[1],budget:5});
 let shots=roundTrip;

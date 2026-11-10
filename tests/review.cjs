@@ -4,7 +4,7 @@ const dt=1/120;
 function shoot(g){const q=g.clone();q.action();for(let f=0;f<750&&q.flight&&q.state==='playing';f++)q.step(dt);return q}
 function options(g,target){const waiting=g.clone(),solutions=[];for(let t=0;t<3.8&&waiting.state==='playing';t+=1/90){const q=shoot(waiting);if(q.current===target&&['playing','won'].includes(q.state))solutions.push({wait:t,game:q});waiting.step(1/90)}return solutions}
 function find(g,target){const opts=options(g,target);assert.ok(opts.length,`${g.level.name} target ${target} must be reachable by waiting and clicking`);const best=opts[Math.floor(opts.length/2)];console.log(' target',target,'windows',opts.length,'wait',best.wait.toFixed(2));return best.game}
-const routes=[[1],[1,2],[1],[1],[1],[1],[1,2],[1,2],[1,2],[1]];
+const routes=require('./star-proofs.json').map(proof=>proof.route.map(move=>move.target));
 for(let i=0;i<10;i++){console.log(stages[i].name);let g=new OrbitGame(stages[i]);const before=JSON.stringify({ball:g.ball,time:g.time,angle:g.angle,score:g.score});g.preview();assert.equal(JSON.stringify({ball:g.ball,time:g.time,angle:g.angle,score:g.score}),before,'preview cannot mutate game');for(const dest of routes[i])g=find(g,dest);assert.equal(g.state,'won')}
 assert.equal(stages[2].nodes.length,2,'level 3 is a one-hop obstacle gap');let g;assert.ok(stages.every(s=>!s.pickups&&!s.collectGoal&&!s.par),'campaign has no collectible or rating objectives');
 g=new OrbitGame(stages[7]);g=find(g,1);assert.equal(g.launchRemaining,4);for(let t=0;t<4.1;t+=dt)g.step(dt);assert.equal(g.state,'dead');assert.equal(g.reason,'起跳时间已到');

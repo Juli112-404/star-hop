@@ -60,7 +60,13 @@ class OrbitGame{
  messageFor(text){this.message=text;this.messageTime=1.4}
  fail(reason){this.state='dead';this.reason=reason;this.failurePoint={x:this.ball.x,y:this.ball.y}}
  gateOpen(g){return (!g.key||this.keys.has(g.key))&&(!g.switch||this.switches.has(g.switch))}
- wallSolid(w){return (!w.switch||!this.switches.has(w.switch))&&(!w.closedWhen||this.switches.has(w.closedWhen))}
+ wallPhase(w){return ((this.time+(w.cycle.phase??0))%w.cycle.period+w.cycle.period)%w.cycle.period}
+ wallSolid(w){
+  return (!w.switch||!this.switches.has(w.switch))&&
+   (!w.closedWhen||this.switches.has(w.closedWhen))&&
+   (!w.key||!this.keys.has(w.key))&&
+   (!w.cycle||this.wallPhase(w)>=w.cycle.open);
+ }
  get goalRemaining(){return this.level.goalDeadline==null||this.goalClockStart===null?null:Math.max(0,this.level.goalDeadline-(this.time-this.goalClockStart))}
  goalReady(){return (this.level.required||[]).every(i=>this.visited.has(i))&&(!this.level.needGravity||this.gravityUsed)&&(!this.level.needPortal||this.portalUsed)&&(!this.level.goalKey||this.keys.has(this.level.goalKey))&&(!this.level.goalSwitch||this.switches.has(this.level.goalSwitch))}
  settlePickups(i){
@@ -70,7 +76,35 @@ class OrbitGame{
   this.pendingPickups.clear();
  }
  action(){if(this.state!=='playing'||this.flight)return;this.bestWait=Math.max(this.bestWait,this.waitOnPlanet);this.used++;this.pendingPickups.clear();const n=this.level.nodes[this.current];if(n.fragile)this.consumed.add(this.current);const p=this.orbitPoint();this.ball={...p,vx:-Math.sin(this.angle)*290*(n.spin||1),vy:Math.cos(this.angle)*290*(n.spin||1)};this.flight=true;this.leftSource=false;this.travelTime=0;this.trail=[]}
- capture(i,miss){this.lastCaptureMiss=miss;this.arrivalHeading=Math.atan2(this.ball.vy,this.ball.vx);this.arrivalTime=this.time;const n=this.level.nodes[i];if(this.consumed.has(i)){this.fail('一次性星球已崩解，不能再返回。请选择另一条路线。');return}if(n.switch&&this.level.goalKey&&!this.keys.has(this.level.goalKey)){this.fail('开关需要金色钥匙，先去钥匙星。');return}if(n.goal&&!this.goalReady()){this.fail(this.level.lockHint||'还需要先经过本关标出的中继，再进入终点。');return}this.current=i;this.visited.add(i);if(i===this.level.goalDeadlineFrom&&this.goalClockStart===null)this.goalClockStart=this.time;this.flight=false;this.launchRemaining=n.launchSeconds??null;this.waitOnPlanet=0;const p=this.node(i);this.angle=Math.atan2(this.ball.y-p.y, this.ball.x-p.x);const perfect=miss<=Math.min(10,(n.r||38)*.24);this.combo=perfect?this.combo+1:0;this.perfects+=+perfect;this.score+=perfect?20+(this.combo-1)*5:10;this.messageFor(perfect?`PERFECT ×${this.combo}`:'捕获成功');if(n.key){this.keys.add(n.key);this.messageFor('获得钥匙 · 金色锁已解除')}if(n.switch){this.switches.add(n.switch);this.messageFor('开关已激活 · 蓝色闸门打开')}this.trail=[];if(!this.inTransit&&!this.twinFollower)this.settlePickups(i);if(n.goal)this.state='won'}
+ capture(i,miss){
+  const n=this.level.nodes[i];
+  if(this.consumed.has(i)){this.fail('一次性星球已崩解，不能再返回。请选择另一条路线。');return}
+  if(n.switch&&this.level.goalKey&&!this.keys.has(this.level.goalKey)){this.fail('开关需要金色钥匙，先去钥匙星。');return}
+  if(n.goal&&!this.goalReady()){this.fail(this.level.lockHint||'还需要先经过本关标出的中继，再进入终点。');return}
+  this.lastCaptureMiss=miss;
+  this.arrivalHeading=Math.atan2(this.ball.vy,this.ball.vx);
+  this.arrivalTime=this.time;
+  this.arrivalPoint={x:this.ball.x,y:this.ball.y};
+  this.current=i;this.visited.add(i);
+  if(i===this.level.goalDeadlineFrom&&this.goalClockStart===null)this.goalClockStart=this.time;
+  this.flight=false;this.launchRemaining=n.launchSeconds??null;this.waitOnPlanet=0;
+  const p=this.node(i);
+  this.angle=Math.atan2(this.ball.y-p.y,this.ball.x-p.x);
+  if(n.landingExits){
+   const {split,upper,lower}=n.landingExits;
+   const below=this.ball.y-p.y>=(n.r||38)*split;
+   this.switches.delete(below?upper:lower);
+   this.switches.add(below?lower:upper);
+  }
+  const perfect=miss<=Math.min(10,(n.r||38)*.24);
+  this.combo=perfect?this.combo+1:0;this.perfects+=+perfect;this.score+=perfect?20+(this.combo-1)*5:10;
+  this.messageFor(perfect?`PERFECT ×${this.combo}`:'捕获成功');
+  if(n.key){this.keys.add(n.key);this.messageFor('获得钥匙 · 金色锁已解除')}
+  if(n.switch){this.switches.add(n.switch);this.messageFor('开关已激活 · 蓝色闸门打开')}
+  this.trail=[];
+  if(!this.inTransit&&!this.twinFollower)this.settlePickups(i);
+  if(n.goal)this.state='won';
+ }
  step(dt){if(this.state!=='playing')return;this.time+=dt;if(this.goalRemaining!==null&&this.goalRemaining<=1e-9){this.fail('抵达时间已到');return}this.messageTime-=dt;this.reflectCooldown=Math.max(0,this.reflectCooldown-dt);this.portalCooldown=Math.max(0,this.portalCooldown-dt);if(!this.flight){this.waitOnPlanet+=dt;if(this.launchRemaining!==null){this.launchRemaining-=dt;if(this.launchRemaining<=0){this.launchRemaining=0;this.fail('起跳时间已到');return}}this.angle+=dt*(this.level.nodes[this.current].orbitRate||2)*(this.level.nodes[this.current].spin||1);this.ball=this.orbitPoint();return}this.travelTime+=dt;const old={x:this.ball.x,y:this.ball.y};
  for(const g of this.level.gravity||[]){const dx=g.x-this.ball.x,dy=g.y-this.ball.y,d=Math.hypot(dx,dy);if(d<g.range){this.gravityUsed=true;const force=g.force*(1-d/g.range);this.ball.vx+=dx/Math.max(d,1)*force*dt;this.ball.vy+=dy/Math.max(d,1)*force*dt;const v=Math.hypot(this.ball.vx,this.ball.vy);this.ball.vx=this.ball.vx/v*290;this.ball.vy=this.ball.vy/v*290}}
  for(const w of this.level.wind||[]){if(this.ball.x>=w.x&&this.ball.x<=w.x+w.w&&this.ball.y>=w.y&&this.ball.y<=w.y+w.h){this.ball.vx+=w.ax*dt;this.ball.vy+=w.ay*dt}}this.ball.x+=this.ball.vx*dt;this.ball.y+=this.ball.vy*dt;this.trail.push(old);if(this.trail.length>100)this.trail.shift();let nearest=null;const add=(event,t)=>{if(t!==null&&(!nearest||t<nearest.t))nearest={...event,t}};const source=this.node(this.current);if(Math.hypot(this.ball.x-source.x,this.ball.y-source.y)>this.radius()+10)this.leftSource=true;
@@ -117,7 +151,7 @@ class OrbitGame{
  }else if(nearest.type==='switch'){this.switches.add(nearest.id)}else if(nearest.type==='reflect'){const p=nearest.surface,dx=p.b.x-p.a.x,dy=p.b.y-p.a.y,len=Math.hypot(dx,dy),nx=-dy/len,ny=dx/len,dot=this.ball.vx*nx+this.ball.vy*ny;this.ball.vx-=2*dot*nx;this.ball.vy-=2*dot*ny;const v=Math.hypot(this.ball.vx,this.ball.vy);this.ball.x+=this.ball.vx/v*1;this.ball.y+=this.ball.vy/v*1;this.reflectCooldown=.025;this.reflections++;}else if(nearest.type==='portal'){const p=nearest.portal,c=Math.cos(p.rotation),s=Math.sin(p.rotation),vx=this.ball.vx*c-this.ball.vy*s,vy=this.ball.vx*s+this.ball.vy*c;this.ball={x:p.exit.x+vx/290*(p.r+9),y:p.exit.y+vy/290*(p.r+9),vx,vy};this.portalCooldown=.3;this.portalUsed=true;this.portalEvents.push({index:this.level.portals.indexOf(p),x:this.ball.x,y:this.ball.y,angle:Math.atan2(vy,vx)});this.trail=[];this.messageFor('传送完成 · 航向旋转 90°')}else this.fail(nearest.type==='core'?'碰撞':nearest.type==='gate'?'尚未解锁':'碰撞');return}
  if(this.ball.x< -70||this.ball.x>this.flightRight||this.ball.y<70||this.ball.y>650||(this.level.flightTimeout!==false&&this.travelTime>6))this.fail('偏离轨道')}
 }
-OrbitGame.prototype.clone=function(){const copy=Object.assign(new OrbitGame(this.level),this);for(const k of ['visited','consumed','keys','switches','collected','pendingPickups'])copy[k]=new Set(this[k]);copy.ball={...this.ball};copy.portalEvents=this.portalEvents.map(e=>({...e}));if(this.twin)copy.twin=this.twin.clone();copy.trail=this.trail.map(p=>({...p}));return copy};
+OrbitGame.prototype.clone=function(){const copy=Object.assign(new OrbitGame(this.level),this);for(const k of ['visited','consumed','keys','switches','collected','pendingPickups'])copy[k]=new Set(this[k]);copy.ball={...this.ball};if(this.arrivalPoint)copy.arrivalPoint={...this.arrivalPoint};copy.portalEvents=this.portalEvents.map(e=>({...e}));if(this.twin)copy.twin=this.twin.clone();copy.trail=this.trail.map(p=>({...p}));return copy};
 // Preview uses the exact collision, gravity and portal rules without changing the real run.
 OrbitGame.prototype.preview=function(duration=.72){
  const points=[],portals=[],twinPoints=[];
@@ -136,7 +170,18 @@ OrbitGame.prototype.preview=function(duration=.72){
   }else if(mainFlying&&(frame%3===0||!sim.flight||sim.state==='dead'))points.push({...sim.ball});
   if(twinFlying&&(frame%3===0||!sim.twin.flight||sim.state==='dead'))twinPoints.push({...sim.twin.ball});
  }
- return {points,portals,twinPoints,pairedLanding:!!sim.twin&&!sim.inTransit&&sim.state!=='dead',landing:sim.state==='won',starLanding:sim.collected.size>this.collected.size};
+ const pairedLanding=!!sim.twin&&!sim.inTransit&&sim.state!=='dead';
+ const landingPoints=pairedLanding&&sim.current!==this.current
+  ? [sim.arrivalPoint,sim.twin.arrivalPoint]
+  : null;
+ const landed=!sim.flight&&!sim.inTransit&&sim.state!=='dead'&&sim.current!==this.current;
+ let openingSwitch;
+ if(this.level.routeCue&&landed){
+  openingSwitch=this.level.flySwitches?.find(sensor=>!this.switches.has(sensor.switch)&&sim.switches.has(sensor.switch))?.switch;
+ }
+ const exits=landed?this.level.nodes[sim.current].landingExits:null;
+ const landingExit=exits?(sim.switches.has(exits.upper)?exits.upper:exits.lower):null;
+ return {points,portals,twinPoints,pairedLanding,landingPoints,openingSwitch,landingExit,landingNode:landed?sim.current:null,landing:sim.state==='won',starLanding:sim.collected.size>this.collected.size};
 };
 // Both balls fly independently, then regroup at fixed chord distance before another launch.
 const originalAction=OrbitGame.prototype.action,originalStep=OrbitGame.prototype.step;
@@ -151,6 +196,7 @@ for(const index of t.collected)this.collected.add(index);if(this.state==='dead'|
  const other=failed===this?t:this;
  const missedGoal=failed.reason==='偏离轨道'&&(other.state==='won'||(other===this&&this.firstArrived));
  this.fail(missedGoal?(failed===this?'白球未抵达终点':'蓝球未抵达终点'):failed.reason);
+ this.failedBall=failed===this?'white':'blue';
  this.failurePoint={...failed.failurePoint};
  return}
 if(this.state==='won'){this.firstArrived=true;this.state='playing'}

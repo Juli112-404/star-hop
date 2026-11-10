@@ -13,7 +13,11 @@ for(const width of [390,900]){
  const doc={querySelector(sel){assert.ok(elements.has(sel),'Unexpected or removed DOM reference: '+sel);return elements.get(sel)},addEventListener(n,fn){handlers[n]=fn},createElement(){return{click(){}}}};
  const saved=new Map();
  const scope={StarCheckpoint:require('../src/checkpoints.js'),StarEconomy:require('../src/economy.js'),document:doc,localStorage:{getItem:key=>saved.get(key)??null,setItem:(key,value)=>saved.set(key,value)},innerWidth:width,innerHeight:844,devicePixelRatio:1,location:{search:'?level=1'},URLSearchParams,OrbitEngine:require('../src/levels-engine.js'),PlanetLevels:stages,addEventListener(n,f){handlers[n]=f},requestAnimationFrame:f=>frame=f,Math,Date,JSON,Set};
- vm.runInNewContext(source.replace('})();','globalThis.testHooks={game:()=>game,select,action,completed};})();'),scope);frame(16);assert.ok(drawn.includes('点击释放起跳'));assert.equal(elements.get('.overlay').style.display,'none');assert.ok(!handlers.keydown);
+ vm.runInNewContext(source.replace('})();','globalThis.testHooks={game:()=>game,select,action,completed};})();'),scope);
+ assert.equal(elements.get('.overlay').style.display,'grid');
+ assert.equal(elements.get('.panel p').textContent,'点击起跳。');
+ elements.get('#primary').onclick();
+ frame(16);assert.ok(drawn.includes('点击释放起跳'));assert.equal(elements.get('.overlay').style.display,'none');assert.ok(!handlers.keydown);
  drawn.length=0;elements.get('canvas').onpointerdown({preventDefault(){}});frame(32);assert.ok(!drawn.includes('点击释放起跳'));assert.equal(scope.testHooks.game().used,1);assert.ok(!elements.get('#status').textContent.includes('/'));
  const hook=scope.testHooks;
  children[49].onclick();assert.equal(hook.game().level.name,stages[0].name);

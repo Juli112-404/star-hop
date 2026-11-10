@@ -1,322 +1,114 @@
 {
-  "10": {
-    "route": [
+  "17": [
+    [
       {
-        "wait": 0.3333333333333333,
-        "target": 1
-      }
-    ],
-    "successfulShotShare": 0.4,
-    "sampleCount": 20,
-    "centerDistance": 0.006,
-    "timingTolerance": 0.016666666666666666
-  },
-  "11": {
-    "route": [
-      {
-        "wait": 4.166666666666667,
-        "target": 1
-      }
-    ],
-    "successfulShotShare": 0.429,
-    "sampleCount": 14,
-    "centerDistance": 3.999,
-    "timingTolerance": 0.016666666666666666
-  },
-  "12": {
-    "route": [
-      {
-        "wait": 0.7666666666666667,
-        "target": 1
+        "target": 1,
+        "wait": 0.8
       },
       {
-        "wait": 5.283333333333333,
-        "target": 2
+        "target": 2,
+        "wait": 1.375
+      },
+      {
+        "target": 4,
+        "wait": 1.3
       }
     ],
-    "successfulShotShare": 0.407,
-    "sampleCount": 27,
-    "centerDistance": 0.001,
-    "timingTolerance": 0.016666666666666666
-  },
-  "13": {
-    "route": [
+    [
       {
-        "wait": 0.75,
-        "target": 1
+        "target": 3,
+        "wait": 1.65
       },
       {
-        "wait": 3.216666666666667,
-        "target": 2
+        "target": 4,
+        "wait": 0.3
+      }
+    ]
+  ],
+  "27": [
+    [
+      {
+        "target": 1,
+        "wait": 0.75
+      },
+      {
+        "target": 2,
+        "wait": 1.625
+      },
+      {
+        "target": 3,
+        "wait": 2.65
       }
     ],
-    "successfulShotShare": 0.387,
-    "sampleCount": 31,
-    "centerDistance": 0.001,
-    "timingTolerance": 0.016666666666666666
-  },
-  "16": {
-    "route": [
+    [
       {
-        "wait": 4.133333333333334,
-        "target": 1
+        "target": 1,
+        "wait": 0.8
+      },
+      {
+        "target": 3,
+        "wait": 4.2
+      }
+    ]
+  ],
+  "31": [
+    [
+      {
+        "target": 1,
+        "wait": 0.85
+      },
+      {
+        "target": 2,
+        "exit": "upper-exit",
+        "wait": 0.35
+      },
+      {
+        "target": 3,
+        "wait": 1.075
       }
     ],
-    "successfulShotShare": 0.7,
-    "sampleCount": 10,
-    "centerDistance": 0,
-    "timingTolerance": 0.016666666666666666
-  },
-  "18": {
-    "route": [
+    [
       {
-        "wait": 1.2833333333333334,
-        "target": 1
+        "target": 1,
+        "wait": 0.775
+      },
+      {
+        "target": 2,
+        "exit": "lower-exit",
+        "wait": 0.475
+      },
+      {
+        "target": 3,
+        "wait": 2.175
+      }
+    ]
+  ],
+  "45": [
+    [
+      {
+        "target": 1,
+        "exit": "short",
+        "wait": 0.925
+      },
+      {
+        "target": 3,
+        "wait": 0.6
       }
     ],
-    "successfulShotShare": 0.5,
-    "sampleCount": 6,
-    "centerDistance": 0.001,
-    "timingTolerance": 0.016666666666666666
-  },
-  "21": {
-    "route": [
+    [
       {
-        "wait": 0.75,
-        "target": 1
+        "target": 1,
+        "exit": "relay",
+        "wait": 1.125
+      },
+      {
+        "target": 2,
+        "wait": 1.65
+      },
+      {
+        "target": 3,
+        "wait": 0.075
       }
-    ],
-    "successfulShotShare": 0.533,
-    "sampleCount": 15,
-    "centerDistance": 0.004,
-    "timingTolerance": 0.016666666666666666
-  },
-  "24": {
-    "route": [
-      {
-        "wait": 0.7333333333333333,
-        "target": 1
-      }
-    ],
-    "successfulShotShare": 0.429,
-    "sampleCount": 14,
-    "centerDistance": 0.004,
-    "timingTolerance": 0.016666666666666666
-  },
-  "26": {
-    "route": [
-      {
-        "wait": 3.95,
-        "target": 1
-      },
-      {
-        "wait": 4.45,
-        "target": 2
-      }
-    ],
-    "successfulShotShare": 0.438,
-    "sampleCount": 16,
-    "centerDistance": 3.81,
-    "timingTolerance": 0.016666666666666666
-  },
-  "27": {
-    "route": [
-      {
-        "wait": 3.8666666666666667,
-        "target": 1
-      },
-      {
-        "wait": 1.5,
-        "target": 2
-      },
-      {
-        "wait": 3.1166666666666667,
-        "target": 3
-      }
-    ],
-    "successfulShotShare": 0.387,
-    "sampleCount": 31,
-    "centerDistance": 2.103,
-    "timingTolerance": 0.016666666666666666
-  },
-  "28": {
-    "route": [
-      {
-        "wait": 0.7166666666666667,
-        "target": 1
-      },
-      {
-        "wait": 5.25,
-        "target": 0
-      },
-      {
-        "wait": 3.283333333333333,
-        "target": 2
-      }
-    ],
-    "successfulShotShare": 0.407,
-    "sampleCount": 27,
-    "centerDistance": 2.285,
-    "timingTolerance": 0.016666666666666666
-  },
-  "29": {
-    "route": [
-      {
-        "wait": 0.5333333333333333,
-        "target": 1
-      },
-      {
-        "wait": 4.1,
-        "target": 2
-      }
-    ],
-    "successfulShotShare": 0.417,
-    "sampleCount": 24,
-    "centerDistance": 0.001,
-    "timingTolerance": 0.016666666666666666
-  },
-  "30": {
-    "route": [
-      {
-        "wait": 6.3,
-        "target": 1
-      },
-      {
-        "wait": 4,
-        "target": 2
-      }
-    ],
-    "successfulShotShare": 0.407,
-    "sampleCount": 27,
-    "centerDistance": 0.002,
-    "timingTolerance": 0.016666666666666666
-  },
-  "32": {
-    "route": [
-      {
-        "wait": 4.05,
-        "target": 1
-      },
-      {
-        "wait": 3.683333333333333,
-        "target": 2
-      },
-      {
-        "wait": 5.866666666666666,
-        "target": 3
-      }
-    ],
-    "successfulShotShare": 0.412,
-    "sampleCount": 17,
-    "centerDistance": 0.003,
-    "timingTolerance": 0.016666666666666666
-  },
-  "33": {
-    "route": [
-      {
-        "wait": 0.9,
-        "target": 1
-      },
-      {
-        "wait": 3.7333333333333334,
-        "target": 2
-      },
-      {
-        "wait": 1.5166666666666666,
-        "target": 3
-      }
-    ],
-    "successfulShotShare": 0.417,
-    "sampleCount": 36,
-    "centerDistance": 3.581,
-    "timingTolerance": 0.016666666666666666
-  },
-  "35": {
-    "route": [
-      {
-        "wait": 3.85,
-        "target": 1
-      },
-      {
-        "wait": 1.25,
-        "target": 2
-      }
-    ],
-    "successfulShotShare": 0.438,
-    "sampleCount": 16,
-    "centerDistance": 3.731,
-    "timingTolerance": 0.016666666666666666
-  },
-  "36": {
-    "route": [
-      {
-        "wait": 6.683333333333334,
-        "target": 1
-      },
-      {
-        "wait": 4.383333333333334,
-        "target": 2
-      }
-    ],
-    "successfulShotShare": 0.389,
-    "sampleCount": 18,
-    "centerDistance": 0.055,
-    "timingTolerance": 0.016666666666666666
-  },
-  "39": {
-    "route": [
-      {
-        "wait": 7.483333333333333,
-        "target": 1
-      },
-      {
-        "wait": 1.2333333333333334,
-        "target": 2
-      }
-    ],
-    "successfulShotShare": 0.381,
-    "sampleCount": 21,
-    "centerDistance": 0.902,
-    "timingTolerance": 0.016666666666666666
-  },
-  "40": {
-    "route": [
-      {
-        "wait": 3.5833333333333335,
-        "target": 1
-      },
-      {
-        "wait": 4.233333333333333,
-        "target": 2
-      }
-    ],
-    "successfulShotShare": 0.375,
-    "sampleCount": 16,
-    "centerDistance": 0.001,
-    "timingTolerance": 0.016666666666666666
-  },
-  "48": {
-    "route": [
-      {
-        "wait": 0.7166666666666667,
-        "target": 1
-      },
-      {
-        "wait": 3.05,
-        "target": 2
-      },
-      {
-        "wait": 3.3,
-        "target": 3
-      },
-      {
-        "wait": 4.433333333333334,
-        "target": 4
-      }
-    ],
-    "successfulShotShare": 0.4,
-    "sampleCount": 40,
-    "centerDistance": 3.512,
-    "timingTolerance": 0.016666666666666666
-  }
+    ]
+  ]
 }

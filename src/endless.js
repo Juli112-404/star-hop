@@ -2,11 +2,195 @@
 'use strict';
 const isNode=typeof module!=='undefined'&&module.exports;
 const {OrbitGame}=isNode?require('./levels-engine.js'):root.OrbitEngine;
-const stages=isNode?require('./review-data.js'):root.PlanetLevels;
 const dt=1/120,tau=2*Math.PI,revivalCost=10;
 
 // Keep the endless layouts independent from campaign redesigns.
 const endlessLayouts={
+  "1": {
+    "nodes": [
+      {
+        "x": 115,
+        "y": 340,
+        "r": 70
+      },
+      {
+        "x": 390,
+        "y": 310,
+        "r": 68,
+        "goal": true
+      }
+    ]
+  },
+  "4": {
+    "nodes": [
+      {
+        "x": 90,
+        "y": 420,
+        "r": 60
+      },
+      {
+        "x": 480,
+        "y": 330,
+        "r": 76,
+        "goal": true
+      }
+    ],
+    "gravity": [
+      {
+        "x": 300,
+        "y": 280,
+        "r": 19,
+        "range": 155,
+        "force": 1000
+      }
+    ],
+    "obstacles": [
+      {
+        "x": 300,
+        "y": 385,
+        "r": 65
+      }
+    ]
+  },
+  "5": {
+    "nodes": [
+      {
+        "x": 90,
+        "y": 420,
+        "r": 60
+      },
+      {
+        "x": 465,
+        "y": 300,
+        "r": 60,
+        "goal": true,
+        "move": {
+          "axis": "y",
+          "amp": 85,
+          "rate": 1.1
+        }
+      }
+    ]
+  },
+  "6": {
+    "nodes": [
+      {
+        "x": 90,
+        "y": 430,
+        "r": 60
+      },
+      {
+        "x": 455,
+        "y": 155,
+        "r": 60,
+        "goal": true
+      }
+    ],
+    "obstacles": [
+      {
+        "x": 300,
+        "y": 285,
+        "r": 78
+      }
+    ],
+    "portals": [
+      {
+        "entry": {
+          "x": 260,
+          "y": 430
+        },
+        "exit": {
+          "x": 410,
+          "y": 325
+        },
+        "r": 42,
+        "rotation": -1.5707963267948966
+      }
+    ]
+  },
+  "10": {
+    "nodes": [
+      {
+        "x": 80,
+        "y": 420,
+        "r": 63
+      },
+      {
+        "x": 500,
+        "y": 400,
+        "r": 76,
+        "goal": true
+      }
+    ],
+    "obstacles": [
+      {
+        "x": 300,
+        "y": 410,
+        "r": 90
+      }
+    ],
+    "reflectors": [
+      {
+        "a": {
+          "x": 130,
+          "y": 160
+        },
+        "b": {
+          "x": 470,
+          "y": 160
+        }
+      }
+    ]
+  },
+  "20": {
+    "nodes": [
+      {
+        "x": 80,
+        "y": 410,
+        "r": 60
+      },
+      {
+        "x": 500,
+        "y": 260,
+        "r": 69,
+        "goal": true
+      }
+    ],
+    "wind": [
+      {
+        "x": 190,
+        "y": 200,
+        "w": 190,
+        "h": 300,
+        "ax": 0,
+        "ay": -100
+      }
+    ],
+    "obstacles": [
+      {
+        "x": 335,
+        "y": 380,
+        "r": 48
+      }
+    ]
+  },
+  "25": {
+    "nodes": [
+      {
+        "x": 100,
+        "y": 360,
+        "r": 58
+      },
+      {
+        "x": 420,
+        "y": 330,
+        "r": 81,
+        "goal": true
+      }
+    ],
+    "twinDistance": 16,
+    "twinOffset": 0.2546557930414639
+  },
   "18": {"nodes":[{"x":115,"y":340,"r":70},{"x":390,"y":310,"r":61,"goal":true}]},
   "14": {
     "nodes": [
@@ -166,17 +350,17 @@ const endlessLayouts={
   }
 };
 
-function campaign(index,count){
-  const {nodes,gravity,wind,obstacles,reflectors,portals,twinDistance,twinOffset}=endlessLayouts[index]||stages[index-1];
+function layout(index,count){
+  const {nodes,gravity,wind,obstacles,reflectors,portals,twinDistance,twinOffset}=endlessLayouts[index];
   return {nodes:nodes.slice(0,count??nodes.length).map((n,i)=>({...n,goal:i===(count??nodes.length)-1})),gravity,wind,obstacles,reflectors,portals,twinDistance,twinOffset};
 }
 const patterns=[
   ['direct',0,()=>({nodes:[{x:105,y:345},{x:405,y:345,goal:true}]})],
-  ['moving',8,()=>campaign(5)],['reverse',9,()=>{const level=campaign(1);level.nodes[0].spin=-1;return level}],
-  ['portal',12,()=>campaign(6)],['bounce',13,()=>campaign(10)],['timer',10,()=>campaign(1)],
-  ['gravity',15,()=>campaign(4)],['wind',16,()=>campaign(20)],['sweep',14,()=>campaign(14)],
+  ['moving',8,()=>layout(5)],['reverse',9,()=>{const level=layout(1);level.nodes[0].spin=-1;return level}],
+  ['portal',12,()=>layout(6)],['bounce',13,()=>layout(10)],['timer',10,()=>layout(1)],
+  ['gravity',15,()=>layout(4)],['wind',16,()=>layout(20)],['sweep',14,()=>layout(14)],
   ['fork',11,()=>({nodes:[{x:100,y:350},{x:390,y:200,goal:true},{x:440,y:485,goal:true}]})],
-  ['window',18,()=>{const level=campaign(18);level.nodes[1].window={period:4,open:2.6};return level}],['repel',19,()=>({"nodes":[{"x":80,"y":420,"r":60},{"x":500,"y":320,"r":78,"goal":true}],"gravity":[{"x":300,"y":400,"r":20,"range":150,"force":-700}],"obstacles":[{"x":300,"y":460,"r":45}]})],['twins',21,()=>campaign(25)],
+  ['window',18,()=>{const level=layout(18);level.nodes[1].window={period:4,open:2.6};return level}],['repel',19,()=>({"nodes":[{"x":80,"y":420,"r":60},{"x":500,"y":320,"r":78,"goal":true}],"gravity":[{"x":300,"y":400,"r":20,"range":150,"force":-700}],"obstacles":[{"x":300,"y":460,"r":45}]})],['twins',21,()=>layout(25)],
   ['lock',20,()=>({
     nodes:[{x:95,y:355},{x:460,y:350,goal:true}],
     flightKey:{x:280,y:350,r:43},goalKey:'gold',lockHint:'先穿过钥匙，再抵达终点'
@@ -185,10 +369,10 @@ const patterns=[
     nodes:[{x:100,y:365},{x:500,y:360,goal:true}],
     walls:[{a:{x:300,y:280},b:{x:300,y:370}}]
   })],
-  ['movingBounce',23,()=>campaign(39,2)],['movingGravity',25,()=>{const level=campaign(29,2);level.obstacles=level.obstacles.slice(0,1);return level}],
-  ['twinWind',28,()=>{const level=campaign(40,2);delete level.obstacles;return level}],
-  ['timedPortal',24,()=>campaign(6)],['timedMoving',22,()=>campaign(5)],
-  ['reverseWind',26,()=>{const level=campaign(20);level.nodes[0].spin=-1;return level}]
+  ['movingBounce',23,()=>layout(39,2)],['movingGravity',25,()=>{const level=layout(29,2);level.obstacles=level.obstacles.slice(0,1);return level}],
+  ['twinWind',28,()=>{const level=layout(40,2);delete level.obstacles;return level}],
+  ['timedPortal',24,()=>layout(6)],['timedMoving',22,()=>layout(5)],
+  ['reverseWind',26,()=>{const level=layout(20);level.nodes[0].spin=-1;return level}]
 ].map(([id,unlock,make])=>({id,unlock,make}));
 
 const families={

@@ -1,3 +1,41 @@
-const {OrbitGame}=require('../src/levels-engine.js');const levels=require('../src/review-data.js');
-function windows(g,dest,horizon=3.15){const w=g.clone(),ok=[];let run=0,best=0,first=null;for(let f=0;f<horizon*120&&w.state==='playing';f++){const q=w.clone();q.action();for(let k=0;k<1100&&(q.flight||q.inTransit)&&q.state==='playing';k++)q.step(1/120);const valid=q.current===dest&&q.state!=='dead'&&!q.inTransit;if(valid){ok.push({game:q,frame:f});run++;best=Math.max(best,run);first??=f}else run=0;w.step(1/120)}return{ok,best:best/120,first:first/120}}
-for(const i of [30,32,33,34,36,37,38]){let g=new OrbitGame(levels[i]);const route=({30:[1],32:[1],33:[1,2,3,4],34:[1,2],36:[1],37:[1,2],38:[1,2]})[i];const report=[];for(const dest of route){const x=windows(g,dest,i===38?12:3.15);const assert=require('assert');if([30,32,33,36].includes(i)&&dest===1)assert(x.best>=.10,'first launch needs a fair window after wall collision changes');if(i===37&&dest===2)assert(x.best>=.075,'repulsion follow-up needs a fair window with the orbiting obstacle');if(i===34)assert(x.best>=.075,'twin transfer window');if(i===38)assert(x.best>=.075,'moving reflector relay and finish need a usable window');report.push({dest,n:x.ok.length,window:+x.best.toFixed(3),first:+x.first.toFixed(3)});if(!x.ok.length)break;g=x.ok[Math.floor(x.ok.length/2)].game}console.log(levels[i].name,JSON.stringify(report))}
+const assert=require('node:assert/strict');
+const {OrbitGame}=require('../src/levels-engine.js');
+const levels=require('../src/review-data.js');
+const proofs=require('./star-proofs.json');
+const dt=1/120;
+
+function readyAfter(game,ticks){
+  const next=game.clone();
+  for(let i=0;i<ticks;i++)next.step(dt);
+  return next;
+}
+function flight(game){
+  game.action();
+  for(let i=0;i<1100&&(game.flight||game.inTransit)&&game.state==='playing';i++)game.step(dt);
+  return game;
+}
+
+for(const number of [31,33,34,35,36,37,38,39]){
+  const level=levels[number-1];
+  let game=new OrbitGame(level);
+  const widths=[];
+  for(const {wait,target,exit,bounce} of proofs[number-1].route){
+    const ticks=Math.round(wait/dt);
+    const qualifies=shot=>shot.state!=='dead'&&!shot.flight&&!shot.inTransit&&shot.current===target&&
+      (!exit||shot.switches.has(exit))&&(!bounce||shot.reflections>game.reflections);
+    const expected=flight(readyAfter(game,ticks));
+    assert(qualifies(expected),level.name+' proof flight');
+    let width=1;
+    for(const direction of [-1,1]){
+      for(let offset=1;offset<=60&&ticks+offset*direction>=0;offset++){
+        if(!qualifies(flight(readyAfter(game,ticks+offset*direction))))break;
+        width++;
+      }
+    }
+    assert(width>=9,level.name+' verified route has a continuous launch window');
+    widths.push(width);
+    game=expected;
+  }
+  assert.equal(game.state,'won');
+  console.log('PASS',level.name,'launch window ticks',widths);
+}
