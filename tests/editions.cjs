@@ -26,7 +26,8 @@ for(const edition of [normal,judge]){
  }
 }
 const direct=openEdition('judge.html','','?level=40');
-assert.equal(direct.frame.srcdoc,direct.scenes.levels);
+const directCampaign=direct.frame.srcdoc;
+assert.match(directCampaign,/StarHopRequestedLevel=40;/);
 direct.events.message({source:direct.frame.contentWindow,data:{starHopNavigate:'index.html'}});
 direct.events.hashchange();
 assert.equal(direct.frame.style.display,'none');
@@ -44,6 +45,8 @@ function campaign(scene){
  const ctx=new Proxy({},{get:()=>()=>{},set:()=>true});
  function el(s){if(!els.has(s))els.set(s,{style:{},classList:{toggle(){},remove(){}},querySelectorAll:()=>options,getContext:()=>ctx,scrollIntoView(){},getBoundingClientRect:()=>({bottom:130})});return els.get(s)}
  const scope=vm.createContext({document:{querySelector:el,addEventListener(){}},location:{search:''},URLSearchParams,innerWidth:390,innerHeight:844,devicePixelRatio:1,addEventListener(){},requestAnimationFrame(){},localStorage:{getItem:key=>saved.get(key)??null,setItem:(k,v)=>saved.set(k,v)}});
+ scope.location.href='about:srcdoc';
+ scope.parent={get location(){throw new Error('Sandboxed parent access denied')}};
  for(const code of scripts(scene))vm.runInContext(code,scope);
  return {el,options};
 }
@@ -55,6 +58,9 @@ regular.el('canvas').onpointerdown({preventDefault(){}});
 assert.equal(JSON.parse(saved.get(walletKey)).used[1],1);
 const free=campaign(judge.scenes.levels);
 assert(!free.el('#levels').innerHTML.includes('disabled'));
+assert.match(campaign(directCampaign).el('#levels').innerHTML,/class="active"\s+data-level="39"/);
+free.el('#primary').onclick();
+free.el('canvas').onpointerdown({preventDefault(){}});
 free.options[49].onclick();
 assert.match(free.el('#levels').innerHTML,/class="active"\s+data-level="49"/);
 for(let i=0;i<7;i++){

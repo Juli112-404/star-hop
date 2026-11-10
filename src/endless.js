@@ -373,7 +373,7 @@ const patterns=[
   ['twinWind',28,()=>{const level=layout(40,2);delete level.obstacles;return level}],
   ['timedPortal',24,()=>layout(6)],['timedMoving',22,()=>layout(5)],
   ['reverseWind',26,()=>{const level=layout(20);level.nodes[0].spin=-1;return level}]
-].map(([id,unlock,make])=>({id,unlock,make}));
+].map(([id,unlock,make])=>({id,unlock:id==='direct'?0:unlock-5,make}));
 
 const families={
   timedMoving:'moving',timedPortal:'portal',movingBounce:'bounce',
@@ -392,7 +392,7 @@ function shuffle(items,random){
 
 function difficulty(hops){
   const tier=Math.min(10,Math.floor(hops/5));
-  return {tier,radius:hops<8?76-hops:72-3*tier,rate:1.38+.025*tier};
+  return {tier,radius:hops<3?72-4*hops:64-Math.round(2.2*tier),rate:1.38+.025*tier};
 }
 function build(pattern,hops,sourceRadius,mirrored,variation=0){
   const {radius,rate}=difficulty(hops);
@@ -511,7 +511,7 @@ class EndlessRun{
   next(anchor={x:0,y:0,r:76}){
     const withStar=this.random()<.2;
     const direct=patterns[0];
-    const baseJump=this.hops<8||(this.directStreak<2&&this.random()<.25);
+    const baseJump=this.hops<3||(this.hops>3&&this.directStreak<2&&this.random()<.25);
     const choices=baseJump?[direct]:[...this.mechanicChoices(),direct];
     const variation=this.random();
     const mirror=this.hops>8&&this.random()<.12;

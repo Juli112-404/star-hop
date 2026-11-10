@@ -22,8 +22,7 @@ for(const p of patterns){
 }
 assert(new EndlessRun(()=>.199999).next().level.pickups.length===1);
 assert.equal(new EndlessRun(()=>.2).next().level.pickups,undefined);
-assert.equal(difficulty(4).radius,72);
-assert.equal(difficulty(5).radius,71);
+assert.deepEqual([0,1,2,3,5].map(hops=>difficulty(hops).radius),[72,68,64,64,62]);
 assert.equal(difficulty(500).radius,42);
 const wallet=new Economy({balance:10});
 const random=(()=>{let n=2459;return()=>((n=Math.imul(n,1664525)+1013904223|0)>>>0)/2**32})();
@@ -35,13 +34,14 @@ let introDistance=0,introSize=Infinity;
 for(let i=0;i<100;i++){
   const game=run.game;
   kinds.add(game.level.pattern);
-  if(i<8){
+  if(i<3){
     assert.equal(game.level.pattern,'direct');
     const [a,b]=game.level.nodes;
     const distance=Math.hypot(a.x-b.x,a.y-b.y);
     assert(distance>introDistance&&b.r<introSize);
     introDistance=distance;introSize=b.r;
   }
+  if(i===3)assert.equal(game.level.pattern,'moving');
   if(game.level.pattern!=='direct')assert.notEqual(run.lastFamily,previous);
   previous=run.lastFamily;
   const ready=findShot(game),result=simulate(ready).shot;

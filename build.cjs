@@ -17,7 +17,7 @@ html=html.replace('</body>',`<script type="application/json" id="game-data">${JS
 const scenes=JSON.parse(document.getElementById('game-data').textContent),frame=document.getElementById('game');
 const routes={'levels.html':'levels','review.html':'levels','planet.html':'planet','index.html':${JSON.stringify(judgeMode?'home':'')}};
 const startScene=${judgeMode?"new URLSearchParams(location.search).has('level')?'levels':''":"''"};
-function route(){const mode=location.hash.slice(1)||startScene;if(Object.hasOwn(scenes,mode)){frame.onload=()=>frame.contentWindow.focus();frame.srcdoc=scenes[mode];frame.style.display='block';document.body.style.overflow='hidden'}else{frame.style.display='none';frame.removeAttribute('srcdoc');document.body.style.overflow=''}}
+function route(){const mode=location.hash.slice(1)||startScene;if(Object.hasOwn(scenes,mode)){frame.onload=()=>frame.contentWindow.focus();const level=Number(new URLSearchParams(location.search).get('level'));frame.srcdoc=mode==='levels'&&Number.isInteger(level)&&level>0?scenes[mode].replace('globalThis.StarHopJudge=true;','globalThis.StarHopJudge=true;globalThis.StarHopRequestedLevel='+level+';'):scenes[mode];frame.style.display='block';document.body.style.overflow='hidden'}else{frame.style.display='none';frame.removeAttribute('srcdoc');document.body.style.overflow=''}}
 document.addEventListener('click',e=>{const a=e.target.closest('a');if(!a)return;const href=a.getAttribute('href');if(Object.hasOwn(routes,href)){e.preventDefault();location.hash=routes[href]}});
 addEventListener('message',e=>{if(e.source===frame.contentWindow&&Object.hasOwn(routes,e.data?.starHopNavigate))location.hash=routes[e.data.starHopNavigate]});
 addEventListener('hashchange',route);route();

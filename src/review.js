@@ -330,8 +330,7 @@ function frame(t){
   draw(t);
   requestAnimationFrame(frame);
 }
-const search=judgeMode&&location.href==='about:srcdoc'?parent.location.search:location.search;
-const requested=Number(new URLSearchParams(search).get('level'));
+const requested=judgeMode?(globalThis.StarHopRequestedLevel??Number(new URLSearchParams(location.search).get('level'))):0;
 const n=PlanetLevels.findIndex((_,i)=>levelNumber(i)===requested);
 select(Math.max(0,n));
 requestAnimationFrame(frame);
