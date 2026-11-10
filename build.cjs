@@ -11,8 +11,8 @@ const scenes=Object.fromEntries(Object.entries(games).map(([mode,game])=>[
   mode,game.replace('<script>',config+'<script>').replace('</body>',bridge+'</body>')
 ]));
 let html=inline('index.html');
-if(judgeMode)html=html.replace('<title>星际跃迁 · Star Hop</title>','<title>星际跃迁 · 自由选关</title>');
-html=html.replace('<body>','<body><iframe id="game" title="星际跃迁游戏画面" style="display:none;position:fixed;inset:0;width:100%;height:100dvh;border:0;background:#0b1220;z-index:10"></iframe>');
+if(judgeMode)html=html.replace('<title>行星行</title>','<title>行星行 · 自由选关</title>');
+html=html.replace('<body>','<body><iframe id="game" title="行星行游戏画面" style="display:none;position:fixed;inset:0;width:100%;height:100dvh;border:0;background:#0b1220;z-index:10"></iframe>');
 html=html.replace('</body>',`<script type="application/json" id="game-data">${JSON.stringify(scenes).replace(/</g,'\\u003c')}</script><script>
 const scenes=JSON.parse(document.getElementById('game-data').textContent),frame=document.getElementById('game');
 const routes={'levels.html':'levels','review.html':'levels','planet.html':'planet','index.html':${JSON.stringify(judgeMode?'home':'')}};
